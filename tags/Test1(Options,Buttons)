@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Test1</title>
+</head>
+<body>
+	<h1>Testing HTML Tags version 1</h1>
+	<label>Choose an option for player</label>
+	<select>
+		<option value="reserve1">Reserve 1</option>
+		<option value="reserve2">Reserve 2</option>
+		<option value="reserve3">Reserve 3</option>
+		<option value="reserve4">Reserve 4</option>
+		<option value="reserve5">Reserve 5</option>
+	</select>
+	<button type="button" onclick="alert('ButtonType')">Select</button>
+	<button type="reset" onclick="alert('ResetType')">Reset</button>
+	<button type="submit" onclick="alert('SubmitType')" value="test">Submit</button>
+</body>
+</html>

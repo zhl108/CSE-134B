@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Index</title>
+</head>
+<body>
+	<h1>NBADex Team</h1>
+	<section id="TeamDescription">
+		<h3>About the NBADex Team</h3>
+		<p>We are a motivated group of students at the University of California, <em>San Diego</em></p>
+	</section>
+	<section id="JamesOh" class="individual">
+		<h3>James Juhyun Oh</h3>
+		<img src="https://scontent.xx.fbcdn.net/v/t1.0-9/11150734_10152906866122106_333742213979102662_n.jpg?oh=743786e91b5e93e1294e63dabc8117b5&oe=590ACA7F" alt="Picture of James" width="100" height="150">
+		<p><b>Born:</b><time datetime="1994-07-27">July 27th 1994</time></p>
+		<p><b>Contact:</b>805-630-3726</p>
+		<p><b>Email:</b>juo007@ucsd.edu</p>
+		<p><b>Major:</b>Computer Engineering</p>
+	</section>
+</body>
+</html>
