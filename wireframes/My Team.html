@@ -1,0 +1,50 @@
+<section class="myTeam">
+	<!-- Assuming myTeam is an object rendered by Vue/Vanilla from Firebase-->
+	<h4>{{myTeam.name}}</h4>
+	<div class="starter container">
+		<table id="starters">
+			<!--5 players per row-->
+			<thead>
+				<tr class="starters header">
+					<th><label>Point Guard</label></th>
+					<th><label>Point Guard</label></th>
+					<th><label>Point Guard</label></th>
+					<th><label>Point Guard</label></th>
+					<th><label>Point Guard</label></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="starters objects">
+					<td>{{myTeam.pointGuard}}</td>
+					<td>{{myTeam.shootingGuard}}</td>
+					<td>{{myTeam.pointGuard}}</td>
+					<td>{{myTeam.pointGuard}}</td>
+					<td>{{myTeam.pointGuard}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<hr>
+	<div class="bench container">
+		<table id="bench">
+			<thead>			
+				<tr class="bench header">
+					<th><label>Reserve 1</label></th>
+					<th><label>Reserve 2</label></th>
+					<th><label>Reserve 3</label></th>
+					<th><label>Reserve 4</label></th>
+					<th><label>Reserve 5</label></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="bench objects">
+					<td>{{myTeam.bench1}}</td>
+					<td>{{myTeam.bench2}}</td>
+					<td>{{myTeam.bench3}}</td>
+					<td>{{myTeam.bench4}}</td>
+					<td>{{myTeam.bench5}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
