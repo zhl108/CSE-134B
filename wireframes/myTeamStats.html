@@ -1,0 +1,53 @@
+<section class="myTeam">
+    <!-- Assuming myTeam is an object rendered by Vue/Vanilla from Firebase-->
+    <h4>{{myTeam.name}}</h4>
+    <div class="myTeamStats">
+        <table id="statistics">
+            <!--5 players per row-->
+            <thead>
+                <tr class="categories">
+                    <th><label>Name</label></th>
+                    <th><label>Position</label></th>
+                    <th><label>Points</label></th>
+                    <th><label>Rebounds</label></th>
+                    <th><label>Assists</label></th>
+                    <th><label>Steals</label></th>
+                    <th><label>Blocks</label></th>
+                    <th><label>Turnovers</label></th>
+                    <th><label>3P Made</label></th>
+                    <th><label>Free Throws Made</label></th>
+                    <th><label>Field Goal %</label></th>
+                    <th><label>3P Field Goal %</label></th>
+                    <th><label>Free Throw %</label></th>
+                    <th><label>Usage %</label></th>
+                    <th><label>Off Rating</label></th>
+                    <th><label>Def Rating</label></th>
+                    <th><label>TS %</label></th>
+                    <th><label>Effective FG %</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="playersStats">
+                    <td>{{myTeam.player.name}}</td>
+                    <td>{{myTeam.player.position}}</td>
+                    <td>{{myTeam.player.points}}</td>
+                    <td>{{myTeam.player.rebounds}}</td>
+                    <td>{{myTeam.player.assists}}</td>
+                    <td>{{myTeam.player.steals}}</td>
+                    <td>{{myTeam.player.blocks}}</td>
+                    <td>{{myTeam.player.turnovers}}</td>
+                    <td>{{myTeam.player.3pointers}}</td>
+                    <td>{{myTeam.player.freethrows}}</td>
+                    <td>{{myTeam.player.fgpercentage}}</td>
+                    <td>{{myTeam.player.3ppercentage}}</td>
+                    <td>{{myTeam.player.ftpercentage}}</td>
+                    <td>{{myTeam.player.usagepercentage}}</td>
+                    <td>{{myTeam.player.offrating}}</td>
+                    <td>{{myTeam.player.defrating}}</td>
+                    <td>{{myTeam.player.trueshootingper}}</td>
+                    <td>{{myTeam.player.effectivefgper}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
