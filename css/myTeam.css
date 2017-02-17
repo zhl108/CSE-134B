@@ -1,0 +1,99 @@
+hr {
+  margin: 0;
+}
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
+.topnav {
+  background-color: #111;
+  margin: 0;
+}
+
+.topnav ul {
+  margin-bottom: 0px;
+}
+
+.topnav h1 {
+  padding-left: 5%;
+  margin-bottom: -5px;
+  display: inline-block;
+  color: #818181;
+  }
+
+.topnav ul li {
+  list-style-type: none;
+  text-align: right;
+  margin-bottom: 0px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #818181;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: white;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  background-color: #111;
+  z-index: 1;
+  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  padding-top: 60px;
+}
+.sidenav h3{
+  color: #818181;
+  font-size: 1.5em;
+  padding: 8px 8px 8px 32px;
+  margin: 0;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #818181;
+    display: block;
+}
+main h4{
+  text-align: center;
+}
+#starters , #bench{
+  margin: auto;
+  table-layout: fixed;
+}
+#starters td, #bench td{
+  width:20%;
+}
+.starters.objects img, .bench.objects img{
+  width: 100%;
+  display: block;
+  height: 25%;
+  padding: auto;
+}
+.starters label, .bench label{
+  display: block;
+  text-align: center;
+}
+
+footer dl, footer p{
+  text-align: right;
+}
+
+
+
