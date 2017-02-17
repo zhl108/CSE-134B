@@ -3,6 +3,7 @@ hr {
 }
 *{
 	font-family: 'Roboto', sans-serif;
+  margin: 0;
 }
 
 .topnav {
@@ -39,7 +40,7 @@ nav ul li a {
 
 .sidenav .closebtn {
   position: absolute;
-  top: 0;
+  top: 44px;
   right: 10px;
   font-size: 36px;
   margin-left: 50px;
@@ -54,6 +55,7 @@ nav ul li a {
   z-index: 1;
   overflow-x: hidden;
   top: 0;
+  transition: 0.3s;
   left: 0;
   padding-top: 60px;
 }
@@ -69,9 +71,22 @@ nav ul li a {
     font-size: 1.5em;
     color: #818181;
     display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover{
+  color: #f1f1f1;
+}
+.sidenav #myTeamMenuItem{
+  color: #f1f1f1;
+  background-color:  #818181;
+}
+body{
+  background-color: #f3f3f3;
 }
 main h4{
   text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 2em;
 }
 #starters , #bench{
   margin: auto;
@@ -86,14 +101,20 @@ main h4{
   height: 25%;
   padding: auto;
 }
+.starters.objects img:hover, .bench.objects img:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 .starters label, .bench label{
   display: block;
   text-align: center;
 }
-
+footer{
+  background-color: #111;
+  color: #818181;
+  margin: 0;
+  padding: 0;
+}
 footer dl, footer p{
   text-align: right;
+  margin: 0;
 }
-
-
-
