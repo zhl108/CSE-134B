@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Index</title>
+    </head>
+    <body>
+        <nav id="topnav">
+            <div class="topnav container">
+                <h1>NBADex</h1>
+                <ul>
+                    <li>
+                        <a href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a href="wireframes/Login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <nav id="sidenav">
+            <div class="sidenav container">
+                <ul>
+                    <li>
+                        <h3>Menu</h3>
+                    </li>
+                    <li>
+                        <a href="wireframes/myTeam.html">My Team</a>
+                    </li>
+                    <li>
+                        <a href="wireframes/managePlayers.html">Player Management</a>
+                    </li>
+                    <li>
+                        <a href="wireframes/seasonSimulation.html">Simulate Season</a>
+                    </li>
+                    <li>
+                        <a href="wireframes/myTeamStats.html">View Statistics</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <hr>
+        <main>
+            <section class="myTeam">
+                <!-- Assuming myTeam is an object rendered by Vue from Firebase-->
+                <h4>{{myTeam.name}} Overview</h4>
+                <div class="starter container">
+                    <table id="starters">
+                        <!--5 players per row-->
+                        <thead>
+                            <tr class="starters header">
+                                <th>
+                                    <label>Point Guard</label>
+                                </th>
+                                <th>
+                                    <label>Shooting Guard</label>
+                                </th>
+                                <th>
+                                    <label>Small Forward</label>
+                                </th>
+                                <th>
+                                    <label>Power Forward</label>
+                                </th>
+                                <th>
+                                    <label>Center</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="starters objects">
+                                <td>{{myTeam.pointGuard}}</td>
+                                <td>{{myTeam.shootingGuard}}</td>
+                                <td>{{myTeam.smallForward}}</td>
+                                <td>{{myTeam.powerForward}}</td>
+                                <td>{{myTeam.Center}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="bench container">
+                    <table id="bench">
+                        <thead>         
+                            <tr class="bench header">
+                                <th>
+                                    <label>Reserve 1</label>
+                                </th>
+                                <th>
+                                    <label>Reserve 2</label>
+                                </th>
+                                <th>
+                                    <label>Reserve 3</label>
+                                </th>
+                                <th>
+                                    <label>Reserve 4</label>
+                                </th>
+                                <th>
+                                    <label>Reserve 5</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bench objects">
+                                <td>{{myTeam.bench1}}</td>
+                                <td>{{myTeam.bench2}}</td>
+                                <td>{{myTeam.bench3}}</td>
+                                <td>{{myTeam.bench4}}</td>
+                                <td>{{myTeam.bench5}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <dl>
+                <dt>Created By</dt>
+                <dd>Juhyun James Oh</dd>
+                <dd>Zhisheng Lie</dd>
+                <dd>Kevin Kim</dd>
+            </dl>
+            <p>&copy; NBADex</p>
+        </footer>
+    </body>
+</html>
