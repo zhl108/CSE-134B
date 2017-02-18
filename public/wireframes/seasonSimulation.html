@@ -1,29 +1,48 @@
-<section class="seasonSimulation">
-    <h3>Season Simulation</h3>
-    <div class="simulation">
-        <table id="simulationResults">
-            <caption><strong>Results of a simulated season</strong></caption>
-            <thead>
-                <tr>
-                    <th><label>Team</label></th>
-                    <th><label>Record</label></th>
-                    <th><label>Ranking</label></th>
-                    <th><label>Salary</label></th>
-                </tr>
-            <tbody>
-                <tr>
-                    <td><label>{{myTeam.name}}</label></td>
-                    <td><label>{{myTeam.record}}</label></td>
-                    <td><label>{{myTeam.ranking}}</label></td>
-                    <td><label>{{myTeam.salary}}</label></td>
-                </tr>
-                <tr>
-                    <td><label>{{userTeam.name}}</label></td>
-                    <td><label>{{userTeam.record}}</label></td>
-                    <td><label>{{userTeam.ranking}}</label></td>
-                    <td><label>{{userTeam.salary}}</label></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
+<html>    
+    <head>
+        <meta charset="UTF-8"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href= "../css/seasonSimulation.css" type="text/css" />
+        <title>My Team Stats</title>
+    </head>
+    <nav class="header">
+        <a href="../index.html" style="text-decoration:none">NBADex</a>
+    </nav>
+    <body>
+        <section class="seasonSimulation">
+            <h3>Season Simulation</h3>
+            <div class="simulation">
+                <table id="simulationResults">
+                    <caption><strong>Results of a simulated season</strong></caption>
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Record</th>
+                            <th>Ranking</th>
+                            <th>Salary</th>
+                        </tr>
+                    <tbody>
+                        <tr class="teamResult">
+                            <td>Kevin's Team</td>
+                            <td>73-9</td>
+                            <td>1</td>
+                            <td>$100,000,000</td>
+                        </tr>
+                        <tr class="teamResult">
+                            <td>Kevin's Squad</td>
+                            <td>65-17</td>
+                            <td>2</td>
+                            <td>$100,000,000</td>
+                        </tr>
+                        <tr class="teamResult">
+                            <td>James's Crew</td>
+                            <td>60-22</td>
+                            <td>3</td>
+                            <td>$100,000,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>
