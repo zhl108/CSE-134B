@@ -1,0 +1,22 @@
+*{
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+.nav, .container-fluid{
+    background-color: #111111;
+    color: #818181;
+}
+.navbar h1{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+ul li a{
+    color: #818181;
+    text-decoration: none;
+}
+.footer .row{
+    padding-top: 20px;
+}
+.page-header{
+    text-align:center;
+}
