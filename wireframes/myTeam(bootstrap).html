@@ -2,124 +2,124 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Index</title>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+		<link rel="stylesheet" href= "../css/myTeam(Bootstrap).css" type="text/css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+		<title>myTeam/Index</title>
 	</head>
 	<body>
-		<nav id="topnav">
-			<div class="topnav container">
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
 				<h1>NBADex</h1>
-				<ul>
-					<li>
-						<a href="#">Settings</a>
-					</li>
-					<li>
-						<a href="wireframes/Login.html">Login</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-		<nav id="sidenav">
-			<div class="sidenav container">
-				<ul>
-					<li>
-						<h3>Menu</h3>
-					</li>
-					<li>
-						<a href="wireframes/myTeam.html">My Team</a>
+				<ul class="nav nav-pills pull-right">
+					<li class="active">
+						<a>My Team</a>
 					</li>
 					<li>
 						<a href="wireframes/managePlayers.html">Player Management</a>
 					</li>
 					<li>
-						<a href="wireframes/seasonSimulation.html">Simulate Season</a>
+						<a href="#">Settings</a>
 					</li>
 					<li>
 						<a href="wireframes/myTeamStats.html">View Statistics</a>
 					</li>
+					<li>
+						<a href="wireframes/LogIn(Bootstrap).html">Log Out</a>
+					</li>
 				</ul>
 			</div>
 		</nav>
-		<hr>
-		<main>
-			<section class="myTeam">
-				<!-- Assuming myTeam is an object rendered by Vue from Firebase-->
-				<h4>{{myTeam.name}} Overview</h4>
-				<div class="starter container">
-					<table id="starters">
-						<!--5 players per row-->
-						<thead>
-							<tr class="starters header">
-								<th>
-									<label>Point Guard</label>
-								</th>
-								<th>
-									<label>Shooting Guard</label>
-								</th>
-								<th>
-									<label>Small Forward</label>
-								</th>
-								<th>
-									<label>Power Forward</label>
-								</th>
-								<th>
-									<label>Center</label>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="starters objects">
-								<td>{{myTeam.pointGuard}}</td>
-								<td>{{myTeam.shootingGuard}}</td>
-								<td>{{myTeam.smallForward}}</td>
-								<td>{{myTeam.powerForward}}</td>
-								<td>{{myTeam.Center}}</td>
-							</tr>
-						</tbody>
-					</table>
+		<div class="row first">
+			<div class="col-md-2 col-md-offset-1">
+				<div class="centerBlock">
+					<label>Point Guard</label>
+					<img src="http://specials-images.forbesimg.com/imageserve/499832138/960x0.jpg?fit=scale7" class="img-responsive"/>
+					<label>Russell Westbrook</label>
 				</div>
-				<hr>
-				<div class="bench container">
-					<table id="bench">
-						<thead>			
-							<tr class="bench header">
-								<th>
-									<label>Reserve 1</label>
-								</th>
-								<th>
-									<label>Reserve 2</label>
-								</th>
-								<th>
-									<label>Reserve 3</label>
-								</th>
-								<th>
-									<label>Reserve 4</label>
-								</th>
-								<th>
-									<label>Reserve 5</label>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="bench objects">
-								<td>{{myTeam.bench1}}</td>
-								<td>{{myTeam.bench2}}</td>
-								<td>{{myTeam.bench3}}</td>
-								<td>{{myTeam.bench4}}</td>
-								<td>{{myTeam.bench5}}</td>
-							</tr>
-						</tbody>
-					</table>
+			</div>
+			<div class="col-md-2 ">
+				<div class="centerBlock">
+					<label>Shooting Guard</label>
+					<img src="http://www.ferrdi.com/wp-content/uploads/2017/01/Harden.jpg" class="img-responsive"/>
+					<label>James Harden</label>
 				</div>
-			</section>
-		</main>
-		<footer>
-			<dl>
-				<dt>Created By</dt>
-				<dd>Juhyun James Oh</dd>
-				<dd>Zhisheng Lie</dd>
-				<dd>Kevin Kim</dd>
-			</dl>
-			<p>&copy; NBADex</p>
-		</footer>
-	</body>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Small Forward</label>
+					<img src="http://image.nj.com/home/njo-media/width960/img/njcom_photos/photo/2014/06/30/-a91143a0ce4fb0bd.JPG" class="img-responsive"/>
+					<label>LeBron James</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Power Forward</label>
+					<img src="http://images.covers.com/editorial/2012/383x165/blake_griffin021912.jpg" class="img-responsive"/>
+					<label>Blake Griffin</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Center</label>
+					<img src="http://images.covers.com/editorial/2011/383x165/dwight_howard112911.jpg" class="img-responsive"/>
+					<label>Dwight Howard</label>
+				</div>
+			</div>
+		</div>
+		<div class="row second">
+			<div class="col-md-2 col-md-offset-1">
+				<div class="centerBlock">
+					<label>Reserve 1</label>
+					<img src="http://media.philstar.com/images/the-philippine-star/sports/20161027/ps-jeremy-lin.jpg" class="img-responsive"/>
+					<label>Jeremy Lin</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Reserve 2</label>
+					<img src="http://www.trendingtoplists.com/wp-content/uploads/2015/05/ManuIsThinking_0.jpg" class="img-responsive"/>
+					<label>Manu Ginobili</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Reserve 3</label>
+					<img src="https://usatfantasy.files.wordpress.com/2015/11/ricky-rubio-minnestoa-timberwolves_102815.jpg?w=1000&h=700" class="img-responsive"/>
+					<label>Ricky Rubio</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Reserve 4</label>
+					<img src="http://media.philstar.com/images/the-philippine-star/sports/20170103/jimmy-butler-nba-bulls.jpg" class="img-responsive"/>
+					<label>Jimmy Butler</label>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="centerBlock">
+					<label>Reserve 5</label>
+					<img src="https://ipacers.files.wordpress.com/2015/11/111815_paul-george_1200.jpg?w=1000&h=700&crop=1" class="img-responsive"/>
+					<label>Paul George</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2 col-md-offset-10">
+					<dl>
+						<dt>Created By</dt>
+						<dd>Juhyun James Oh</dd>
+						<dd>Zhisheng Lie</dd>
+						<dd>Kevin Kim</dd>
+					</dl>
+					<p>&copy; NBADex</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
 </html>
+
