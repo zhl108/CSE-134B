@@ -1,51 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/Login_bootstrap.css">
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="myTeam(bootstrap).html">NBADex</a>
-            </div>
-        </div>
-        </nav>
-        <div class="container" id="body">
-            <div class="container" id="login_panel">
-                <form class="form-signin">
-                    <h2 class="form-signin-heading">Sign in</h2>
-                    <label for="inputEmail" class="sr-only">Username</label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                        <label>
-                        </label>
-                        <label>
-                            <input type="checkbox" value="remember-me"> Admin
-                        </label>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	<head>
+		<meta charset="utf-8">
+			<title>Login</title>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+			<link rel="stylesheet" href="/css/Login_bootstrap.css"/>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		</head>
+		<body>
+			<nav class="navbar navbar-inverse navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+						</button>
+						<a class="navbar-brand" href="myTeam(bootstrap).html">NBADex</a>
+					</div>
+				</div>
+			</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<ul class="nav nav-tabs final-login" id="myTabs">
+							<li class="active">
+								<a data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="LogIn" class="tab-pane fade in active" role="tabpanel">
+								<form class="form-signin">
+									<label for="inputEmail">E-Mail</label>
+									<input type="email" id="LogInInputEmail" class="form-control" placeholder="E-Mail" required autofocus/>
+									<label for="inputPassword">Password</label>
+									<input type="password" id="LogIninputPassword" class="form-control" placeholder="Password" required/>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="remember-me"/> Remember me
+										</label>
+										<label>
+											<input type="checkbox" value="remember-me"/> Admin
+										</label>
+									</div>
+									<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+								</form>
+							</div>
+							<div id="SignUp" class="tab-pane" role="tabpanel">
+								<form class="form-signup">
+									<label for="inputNameLabel">Name</label>
+									<input type="name" id="inputName" class="form-control" placeholder="Name">
+									<label for="inputEmailLabel">Email</label>
+									<input type="email" id="SignUpInputEmail" class="form-control" placeholder="Email">
+									<label for="inputPasswordLabel">Password</label>
+									<input type="password" id="SignUpInputPassword" class="form-control" placeholder="Password"/>
+									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
+								</form>
+								<button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--Bootstrap JS-->
+			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+			<script type="text/javascript">
+			var config = {
+			apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
+			authDomain: "nbadex-ff8cf.firebaseapp.com",
+			databaseURL: "https://nbadex-ff8cf.firebaseio.com",
+			storageBucket: "nbadex-ff8cf.appspot.com",
+			messagingSenderId: "172457613001"
+			};
 
-                    <div style="padding-top: 4%;"><a href="">Reset Password?</a></div>
-                    <div style="padding-top: 2%;"><a href="">New User?</a></div>
+			firebase.initializeApp(config);
+			const auth = firebase.auth();
+			
+			$('.form-signin').on('submit', event => {
+			event.preventDefault();
+			const email = document.getElementById("LogInInputEmail").value;
+			const pass = document.getElementById("LogInInputPassword").value;
+			const promise = auth.signInWithEmailAndPassword(email,pass);
+			
+			});	
 
-                </form>
-
-            </div>
-        </div>
-    </body>
-</html>
+			$('.form-signup').on('submit', event => {
+			event.preventDefault();
+			const email = document.getElementById("SignUpInputEmail").value;
+			const pass = document.getElementById("SignUpInputPassword").value;
+			const promise = auth.createUserWithEmailAndPassword(email,pass);
+			});
+			</script>
+		</body>
+	</html>
+	
