@@ -1,137 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href= "css/myTeam.css" type="text/css" />
-    <title>Index</title>
-  </head>
-  <body>
-  <nav id="topnav">
-    <div class="topnav container">
-      <h1>NBADex</h1>
-      <ul>
-        <li><a href="wireframes/myTeam(bootstrap).html">BOOTSTRAP</a></li>
-        <li><a href="wireframes/login.html">Log Out</a></li>
-      </ul>
-    </div>
-  </nav>
-  <hr>
-  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <nav id="sidenav">
-    <div id="sidenav1" class="sidenav container">
-      <h3>Menu</h3>
-      <ul>
-        <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>           </li>
-        <li>
-          <a id="myTeamMenuItem">My Team</a>
-        </li>
-        <li>
-          <a href="wireframes/managePlayers.html">Player Management</a>
-        </li>
-        <li>
-          <a href="wireframes/seasonSimulation.html">Simulate Season</a>
-        </li>
-        <li>
-          <a href="wireframes/myTeamStats.html">View Statistics</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <main>
-    <section id="myTeam">
-      <!-- Assuming myTeam is an object rendered by Vue from Firebase-->
-      <h4>James's Crew</h4>
-      <div class="starter container">
-        <table id="starters">
-          <!--5 players per row-->
-          <thead>
-            <tr class="starters header">
-              <th>
-                <label>Point Guard</label>
-              </th>
-              <th>
-                <label>Shooting Guard</label>
-              </th>
-              <th>
-                <label>Small Forward</label>
-              </th>
-              <th>
-                <label>Power Forward</label>
-              </th>
-              <th>
-                <label>Center</label>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="starters objects">
-              <td><img src="http://specials-images.forbesimg.com/imageserve/499832138/960x0.jpg?fit=scale7"/><label>Russell Westbrook</label></td>
-              <td><img src="https://espngrantland.files.wordpress.com/2015/01/james-harden1.jpg"/><label>James Harden</label></td>
-              <td><img src="http://image.nj.com/home/njo-media/width960/img/njcom_photos/photo/2014/06/30/-a91143a0ce4fb0bd.JPG"/><label>LeBron James</label></td>
-              <td><img src="http://images.covers.com/editorial/2012/383x165/blake_griffin021912.jpg"/><label>Blake Griffin</label></td>
-              <td><img src="http://images.covers.com/editorial/2011/383x165/dwight_howard112911.jpg"/><label>Dwight Howard</label></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="bench container">
-        <table id="bench">
-          <thead>
-            <tr class="bench header">
-              <th>
-                <label>Reserve 1</label>
-              </th>
-              <th>
-                <label>Reserve 2</label>
-              </th>
-              <th>
-                <label>Reserve 3</label>
-              </th>
-              <th>
-                <label>Reserve 4</label>
-              </th>
-              <th>
-                <label>Reserve 5</label>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bench objects">
-              <td><img src="http://media.philstar.com/images/the-philippine-star/sports/20161027/ps-jeremy-lin.jpg"/><label>Jeremy Lin</label></td>
-              <td><img src="http://www.trendingtoplists.com/wp-content/uploads/2015/05/ManuIsThinking_0.jpg"/><label>Manu Ginobili</label></td>
-              <td><img src="https://usatfantasy.files.wordpress.com/2015/11/ricky-rubio-minnestoa-timberwolves_102815.jpg?w=1000&h=700"/><label>Ricky Rubio</label></td>
-              <td><img src="http://media.philstar.com/images/the-philippine-star/sports/20170103/jimmy-butler-nba-bulls.jpg"/><label>Jimmy Butler</label></td>
-              <td><img src="https://ipacers.files.wordpress.com/2015/11/111815_paul-george_1200.jpg?w=1000&h=700&crop=1"/><label>Paul George</label></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-  <hr>
-  <footer>
-    <dl>
-      <dt>Created By</dt>
-      <dd>Juhyun James Oh</dd>
-      <dd>Zhisheng Lie</dd>
-      <dd>Kevin Kim</dd>
-    </dl>
-    <p>&copy; NBADex</p>
-  </footer>
-</body>
-<script>
-function openNav() {
-  document.getElementById("sidenav1").style.width = "25%";
-  document.getElementById("myTeam").style.marginLeft = "25%";
-  document.getElementById("topnav").style.marginLeft = "25%";
-}
+	<head>
+		<meta charset="utf-8">
+			<title>Login</title>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+			<link rel="stylesheet" href="/css/Login.css"/>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		</head>
+		<body>
+			<nav class="navbar navbar-inverse navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+							<span class="icon-bar"/>
+						</button>
+						<a class="navbar-brand" href="myTeam.html">NBADex</a>
+					</div>
+				</div>
+			</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<ul class="nav nav-tabs final-login" id="myTabs">
+							<li class="active">
+								<a data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
+							</li>
+							<li>
+								<a data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="LogIn" class="tab-pane fade in active" role="tabpanel">
+								<form class="form-signin">
+									<label for="LogInEmail">E-Mail</label>
+									<input type="email" id="LogInEmail" class="form-control" placeholder="E-Mail" required autofocus/>
+									<label for="inputPassword">Password</label>
+									<input type="password" id="LogInPassword" class="form-control" placeholder="Password" required/>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="remember-me"/> Remember me
+										</label>
+										<label>
+											<input type="checkbox" value="remember-me"/> Admin
+										</label>
+									</div>
+									<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+								</form>
+							</div>
+							<div id="SignUp" class="tab-pane" role="tabpanel">
+								<form class="form-signup">
+									<label for="SignUpName">Name</label>
+									<input type="name" id="SignUpName" class="form-control" placeholder="Name">
+									<label for="SignUpEmail">Email</label>
+									<input type="email" id="SignUpEmail" class="form-control" placeholder="Email">
+									<label for="SignUpPassword">Password</label>
+									<input type="password" id="SignUpPassword" class="form-control" placeholder="Password"/>
+									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
+								</form>
+								<button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--Bootstrap JS-->
+			<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+			<script type="text/javascript">
+			var config = {
+			apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
+			authDomain: "nbadex-ff8cf.firebaseapp.com",
+			databaseURL: "https://nbadex-ff8cf.firebaseio.com",
+			storageBucket: "nbadex-ff8cf.appspot.com",
+			messagingSenderId: "172457613001"
+			};
 
-function closeNav() {
-  document.getElementById("sidenav1").style.width = "0";
-  document.getElementById("myTeam").style.marginLeft = "0";
-  document.getElementById("topnav").style.marginLeft = "0";
-}
-</script>
-</html>
+			firebase.initializeApp(config);
+			const auth = firebase.auth();
+			
+			$('.form-signin').on('submit', event => {
+			event.preventDefault();
+			const email = document.getElementById("LogInEmail").value;
+			const pass = document.getElementById("LogInPassword").value;
+			const promise = auth.signInWithEmailAndPassword(email,pass);
+            promise.catch(e  => console.log(e.message));
+				
+			});	
 
+			$('.form-signup').on('submit', event => {
+			event.preventDefault();
+			const email = document.getElementById("SignUpEmail").value;
+			const pass = document.getElementById("SignUpPassword").value;
+			const promise = auth.createUserWithEmailAndPassword(email,pass);
+			//auth.signInWithEmailAndPassword(email,pass);
+			});
+
+            firebase.auth().onAuthStateChanged(user => {
+                if(user){
+                    console.log('hi');
+                    console.log(user);
+                    window.location = 'views/myTeam.html'
+                }
+            });
+
+			</script>
+		</body>
+	</html>
+	
