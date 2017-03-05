@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 			<title>Login</title>
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-			<link rel="stylesheet" href="/css/Login_bootstrap.css"/>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+			<link rel="stylesheet" href="/css/Login.css"/>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		</head>
 		<body>
@@ -17,7 +17,7 @@
 							<span class="icon-bar"/>
 							<span class="icon-bar"/>
 						</button>
-						<a class="navbar-brand" href="myTeam(bootstrap).html">NBADex</a>
+						<a class="navbar-brand" href="myTeam.html">NBADex</a>
 					</div>
 				</div>
 			</nav>
@@ -35,10 +35,10 @@
 						<div class="tab-content">
 							<div id="LogIn" class="tab-pane fade in active" role="tabpanel">
 								<form class="form-signin">
-									<label for="inputEmail">E-Mail</label>
-									<input type="email" id="LogInInputEmail" class="form-control" placeholder="E-Mail" required autofocus/>
+									<label for="LogInEmail">E-Mail</label>
+									<input type="email" id="LogInEmail" class="form-control" placeholder="E-Mail" required autofocus/>
 									<label for="inputPassword">Password</label>
-									<input type="password" id="LogIninputPassword" class="form-control" placeholder="Password" required/>
+									<input type="password" id="LogInPassword" class="form-control" placeholder="Password" required/>
 									<div class="checkbox">
 										<label>
 											<input type="checkbox" value="remember-me"/> Remember me
@@ -52,12 +52,12 @@
 							</div>
 							<div id="SignUp" class="tab-pane" role="tabpanel">
 								<form class="form-signup">
-									<label for="inputNameLabel">Name</label>
-									<input type="name" id="inputName" class="form-control" placeholder="Name">
-									<label for="inputEmailLabel">Email</label>
-									<input type="email" id="SignUpInputEmail" class="form-control" placeholder="Email">
-									<label for="inputPasswordLabel">Password</label>
-									<input type="password" id="SignUpInputPassword" class="form-control" placeholder="Password"/>
+									<label for="SignUpName">Name</label>
+									<input type="name" id="SignUpName" class="form-control" placeholder="Name">
+									<label for="SignUpEmail">Email</label>
+									<input type="email" id="SignUpEmail" class="form-control" placeholder="Email">
+									<label for="SignUpPassword">Password</label>
+									<input type="password" id="SignUpPassword" class="form-control" placeholder="Password"/>
 									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
 								</form>
 								<button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
@@ -84,18 +84,29 @@
 			
 			$('.form-signin').on('submit', event => {
 			event.preventDefault();
-			const email = document.getElementById("LogInInputEmail").value;
-			const pass = document.getElementById("LogInInputPassword").value;
+			const email = document.getElementById("LogInEmail").value;
+			const pass = document.getElementById("LogInPassword").value;
 			const promise = auth.signInWithEmailAndPassword(email,pass);
-			
+            promise.catch(e  => console.log(e.message));
+				
 			});	
 
 			$('.form-signup').on('submit', event => {
 			event.preventDefault();
-			const email = document.getElementById("SignUpInputEmail").value;
-			const pass = document.getElementById("SignUpInputPassword").value;
+			const email = document.getElementById("SignUpEmail").value;
+			const pass = document.getElementById("SignUpPassword").value;
 			const promise = auth.createUserWithEmailAndPassword(email,pass);
+			//auth.signInWithEmailAndPassword(email,pass);
 			});
+
+            firebase.auth().onAuthStateChanged(user => {
+                if(user){
+                    console.log('hi');
+                    console.log(user);
+                    window.location = 'myTeam.html'
+                }
+            });
+
 			</script>
 		</body>
 	</html>

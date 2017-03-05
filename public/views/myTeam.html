@@ -3,25 +3,34 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
-		<link rel="stylesheet" href= "../css/bootstrap/css/bootstrap.min.css" type="text/css" />
-		<link rel="stylesheet" href= "/css/myTeam(Bootstrap).css" type="text/css" />
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/> -->
+		<link rel="stylesheet" href= "/css/myTeam.css" type="text/css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<title>myTeam/Index</title>
 	</head>
 	<body>
-	<nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <h1>NBADex</h1>
-            <ul class="nav nav-pills pull-right">
-                <li class="active"><a>My Team</a></li>
-                <li><a href="managePlayers(bootstrap).html">Player Management</a></li>
-                <li><a href="myTeamStats(bootstrap).html">View Statistics</a></li>
-                <li><a href="seasonSimulation(bootstrap).html">Simulate Season</a></li>
-                <li><a href="login(bootstrap).html">Log Out</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container">
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
+				<h1>NBADex</h1>
+				<ul class="nav nav-pills pull-right">
+					<li class="active">
+						<a>My Team</a>
+					</li>
+					<li>
+						<a href="managePlayers.html">Player Management</a>
+					</li>
+					<li>
+						<a href="myTeamStats.html">View Statistics</a>
+					</li>
+					<li>
+						<a href="seasonSimulation.html">Simulate Season</a>
+					</li>
+					<li>
+						<a href="" id='LogOut'>Log Out</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 		<div class="row first">
 			<div class="col-md-2 col-md-offset-1">
 				<div class="centerBlock">
@@ -112,6 +121,38 @@
 			</div>
 		</div>
 	</footer>
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script type="text/javascript">
+			var config = {
+			apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
+			authDomain: "nbadex-ff8cf.firebaseapp.com",
+			databaseURL: "https://nbadex-ff8cf.firebaseio.com",
+			storageBucket: "nbadex-ff8cf.appspot.com",
+			messagingSenderId: "172457613001"
+			};
+
+			firebase.initializeApp(config);
+			const auth = firebase.auth();
+
+			$(document).ready(function(){   
+   				$('#LogOut').click(function() {
+   					event.preventDefault();
+            		firebase.auth().signOut();
+    			});
+			});
+
+            firebase.auth().onAuthStateChanged(user => {
+                if(user){
+                    console.log('hi');
+                    console.log(user);
+                    //window.location = 'myTeamBootstrap.html'
+                }else{
+                	window.location = '/';
+                }
+            });
+
+	</script>
+
 </body>
 </html>
 
