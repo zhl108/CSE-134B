@@ -327,6 +327,7 @@ firebase.auth().onAuthStateChanged(user => {
             });
   $('.form-player').on('submit', event => {
     event.preventDefault();
+    $('#addPlayerModal').modal( 'hide' );
 
     /*Get name of img File*/
     var img = $("input:file");
