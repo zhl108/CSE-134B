@@ -118,11 +118,31 @@
 			});	
 
 			$('.form-signup').on('submit', event => {
-			event.preventDefault();
-			const email = document.getElementById("SignUpEmail").value;
-			const pass = document.getElementById("SignUpPassword").value;
-			const promise = auth.createUserWithEmailAndPassword(email,pass);
-			//auth.signInWithEmailAndPassword(email,pass);
+                
+                event.preventDefault();
+                const email = document.getElementById("SignUpEmail").value;
+                const pass = document.getElementById("SignUpPassword").value;
+                const promise = auth.createUserWithEmailAndPassword(email,pass);
+                //auth.signInWithEmailAndPassword(email,pass);
+                promise.catch(e  => {
+                    var errorCode = e.code;
+                    var errorMessage = e.message;
+                    
+                    if (errorCode == 'auth/email-already-in-use') {
+                        $('#err-msg').html("Email already in use");
+                    } 
+                    else if(errorCode == 'auth/invalid-email'){
+                        $('#err-msg').html("Invalid email");
+                    }
+                    else if(errorCode == 'auth/weak-password'){
+                        $('#err-msg').html("Password too weak!");
+                    }
+                    else {
+                        $('#err-msg').html(errorMessage);
+                    }
+                    $("#login-error").css("visibility","visible");
+                    console.log(errorMessage);
+                });
 			});
 			
 			$('#googlebtn').click(function() {
