@@ -141,6 +141,7 @@
 					<th>PER</th>
 					<th>Price</th>
 					<th>Edit Player</th>
+                    <th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -158,6 +159,7 @@
 					<td>
 						<button class="EditPlayerBtn" data-toggle="modal" data-target="#editPlayerModal">Update</button>
 					</td>
+                    <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="deletePlayer(player)"></span></td>
                     <div class="modal fade" id="editPlayerModal" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -180,7 +182,7 @@
                                                     </div>
                                                 </div>
                                                 <br><br>
-                                                <button v-on:click="editPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                                                <button v-on:click="editPlayer" v-on:keyup.enter="editPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
                                                 <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal" id="bot-btn">Cancel</button> 
                                             </div>
                                             <div class="input_group col-md-8">
@@ -305,8 +307,7 @@ var app = new Vue({
         players: playersRef
     },
     methods: {
-        addNewPlayer: function(event) {
-            if (event) event.preventDefault();
+        addNewPlayer: function() {
             var img = $("input:file");
             //console.log(img[0]);
             var imgNames = img[0].value.split('\\');
@@ -350,6 +351,10 @@ var app = new Vue({
         },
         editPlayer: function() {
             console.log("updating")
+        },
+        deletePlayer: function(player) {
+            playersRef.child(player['.key']).remove();
+            console.log("deleted " + player.name);
         }
     }
 });
