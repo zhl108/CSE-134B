@@ -98,6 +98,10 @@
 			const promise = auth.createUserWithEmailAndPassword(email,pass);
 			//auth.signInWithEmailAndPassword(email,pass);
 			});
+			
+			$('#googlebtn').click(function() {
+				firebase.auth().signInWithPopup(provider);				
+			});
 
             firebase.auth().onAuthStateChanged(user => {
                 if(user){
