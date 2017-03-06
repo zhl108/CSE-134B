@@ -29,7 +29,7 @@
                     <li class="active"><a href="managePlayers.html">Player Management</a></li>
                     <li><a href="myTeamStats.html">View Stats</a></li>
                     <li><a href="seasonSimulation.html">Simulate Season</a></li>
-                    <li><a href="../index.html">Log Out</a></li>
+                    <li><a href="" id="LogOut">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -212,7 +212,7 @@ firebase.auth().onAuthStateChanged(user => {
 		console.log(user);
                     //window.location = 'myTeamBootstrap.html'
                 }else{
-                	window.location = '/';
+                	window.location = '../index.html';
                 }
             });
   $('.form-player').on('submit', event => {
