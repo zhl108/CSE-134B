@@ -150,30 +150,12 @@
                     console.log('hi');
                     console.log(user);
                     //window.location = 'myTeamBootstrap.html'
-                    //get user's info
-                    var name, email, photoUrl, uid, emailVerified;
-                    name = user.displayName;
-                    email = user.email;
-                    photoUrl = user.photoURL;
-                    emailVerified = user.emailVerified;
-                    uid = user.uid; 
-
-                    //alert(id);
-                    var usersRef = firebase.database().ref('users');
-                    usersRef.once('value', function(snapshot) {
-                        if (snapshot.hasChild(uid)) {
-                            alert(uid);
-                        }
-                        else {
-                            alert("non-exist: "+uid);
-                        }
-                    });
                 }else{
                 	window.location = '../index.html';
                 }
             });
         
-            //Below is the modification for creating user directory in database, and for further operation
+            //TODO: Below is the modification for creating user directory in database, and for further operation
             var user = firebase.auth().currentUser;
             //to get the user id (uid) from the auth user
             if(user != null){
