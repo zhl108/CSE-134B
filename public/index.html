@@ -37,19 +37,19 @@
 					<div class="col-md-4 col-md-offset-4">
 						<ul class="nav nav-tabs final-login" id="myTabs">
 							<li class="active">
-								<a data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
+								<a class="hide-alert" data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
 							</li>
 							<li>
-								<a data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
+								<a class="hide-alert" data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div id="LogIn" class="tab-pane fade in active" role="tabpanel">
 								<form class="form-signin">
 									<label for="LogInEmail">E-Mail</label>
-									<input type="email" id="LogInEmail" class="form-control" placeholder="E-Mail" required autofocus/>
+									<input type="email" id="LogInEmail" class="form-control hide-alert" placeholder="E-Mail" required autofocus/>
 									<label for="inputPassword">Password</label>
-									<input type="password" id="LogInPassword" class="form-control" placeholder="Password" required/>
+									<input type="password" id="LogInPassword" class="form-control hide-alert" placeholder="Password" required/>
 									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Sign in</button>
 								</form>
 							</div>
@@ -75,6 +75,9 @@
 			<script type="text/javascript">
             
             $("#close-btn").click(function(){
+                $("#login-error").css("visibility","hidden");
+            });
+            $(".hide-alert").focusin(function(){
                 $("#login-error").css("visibility","hidden");
             });
             
