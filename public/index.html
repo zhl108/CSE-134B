@@ -56,11 +56,11 @@
 							<div id="SignUp" class="tab-pane" role="tabpanel">
 								<form class="form-signup">
 									<label for="SignUpName">Name</label>
-									<input type="name" id="SignUpName" class="form-control" placeholder="Name">
+									<input type="name" id="SignUpName" class="form-control hide-alert" placeholder="Name">
 									<label for="SignUpEmail">Email</label>
-									<input type="email" id="SignUpEmail" class="form-control" placeholder="Email">
+									<input type="email" id="SignUpEmail" class="form-control hide-alert" placeholder="Email">
 									<label for="SignUpPassword">Password</label>
-									<input type="password" id="SignUpPassword" class="form-control" placeholder="Password"/>
+									<input type="password" id="SignUpPassword" class="form-control hide-alert" placeholder="Password"/>
 									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
 								</form>
 								<button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
@@ -73,13 +73,6 @@
 			<!--Bootstrap JS-->
 			<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 			<script type="text/javascript">
-            
-            $("#close-btn").click(function(){
-                $("#login-error").css("visibility","hidden");
-            });
-            $(".hide-alert").focusin(function(){
-                $("#login-error").css("visibility","hidden");
-            });
             
 			var config = {
 			apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
@@ -164,7 +157,13 @@
                 $(this).parent().hide();
             });
                 
-
+            $("#close-btn").click(function(){
+                $("#login-error").css("visibility","hidden");
+            });
+            $(".hide-alert").focusin(function(){
+                $("#login-error").css("visibility","hidden");
+            });
+                
 			</script>
 		</body>
 	</html>
