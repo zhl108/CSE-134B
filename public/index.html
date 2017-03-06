@@ -8,163 +8,158 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             
-            <style>
-                #close-btn:hover{
-                    cursor: pointer;
-                }
-            </style>
-		</head>
-		<body>
-			<nav class="navbar navbar-inverse navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"/>
-							<span class="icon-bar"/>
-							<span class="icon-bar"/>
-						</button>
-						<a class="navbar-brand" href="myTeam.html">NBADex</a>
-					</div>
-				</div>
-			</nav>
-			<div class="container">
-                <div class="alert alert-danger fade in col-md-4 col-md-offset-4" id="login-error" style="visibility: hidden;">
-                    <p style="float:right;" id="close-btn">×</p>
-                    <p id="err-msg">Your error message goes here...</p>
+	</head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"/>
+                        <span class="icon-bar"/>
+                        <span class="icon-bar"/>
+                    </button>
+                    <a class="navbar-brand" href="myTeam.html">NBADex</a>
                 </div>
-				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
-						<ul class="nav nav-tabs final-login" id="myTabs">
-							<li class="active">
-								<a class="hide-alert" data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
-							</li>
-							<li>
-								<a class="hide-alert" data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
-							</li>
-						</ul>
-						<div class="tab-content">
-							<div id="LogIn" class="tab-pane fade in active" role="tabpanel">
-								<form class="form-signin">
-									<label for="LogInEmail">E-Mail</label>
-									<input type="email" id="LogInEmail" class="form-control hide-alert" placeholder="E-Mail" required autofocus/>
-									<label for="inputPassword">Password</label>
-									<input type="password" id="LogInPassword" class="form-control hide-alert" placeholder="Password" required/>
-									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Sign in</button>
-								</form>
-							</div>
-							<div id="SignUp" class="tab-pane" role="tabpanel">
-								<form class="form-signup">
-									<label for="SignUpName">Name</label>
-									<input type="name" id="SignUpName" class="form-control hide-alert" placeholder="Name">
-									<label for="SignUpEmail">Email</label>
-									<input type="email" id="SignUpEmail" class="form-control hide-alert" placeholder="Email">
-									<label for="SignUpPassword">Password</label>
-									<input type="password" id="SignUpPassword" class="form-control hide-alert" placeholder="Password"/>
-									<button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
-								</form>
-								<button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!--Bootstrap JS-->
-			<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-			<script type="text/javascript">
-            
-			var config = {
-			apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
-			authDomain: "nbadex-ff8cf.firebaseapp.com",
-			databaseURL: "https://nbadex-ff8cf.firebaseio.com",
-			storageBucket: "nbadex-ff8cf.appspot.com",
-			messagingSenderId: "172457613001"
-			};
+            </div>
+        </nav>
+        <div class="container">
+            <div class="alert alert-danger fade in col-md-4 col-md-offset-4" id="login-error" style="visibility: hidden;">
+                <p style="float:right;" id="close-btn" >×</p>
+                <p id="err-msg">Your error message goes here...</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <ul class="nav nav-tabs final-login" id="myTabs">
+                        <li class="active">
+                            <a class="hide-alert" data-toggle="tab" class="active" href="#LogIn" aria-controls="LogIn">Log In</a>
+                        </li>
+                        <li>
+                            <a class="hide-alert" data-toggle="tab" href="#SignUp" aria-controls="SignUp">Sign up</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="LogIn" class="tab-pane fade in active" role="tabpanel">
+                            <form class="form-signin">
+                                <label for="LogInEmail">E-Mail</label>
+                                <input type="email" id="LogInEmail" class="form-control hide-alert" placeholder="E-Mail" required autofocus/>
+                                <label for="inputPassword">Password</label>
+                                <input type="password" id="LogInPassword" class="form-control hide-alert" placeholder="Password" required/>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">Sign in</button>
+                            </form>
+                        </div>
+                        <div id="SignUp" class="tab-pane" role="tabpanel">
+                            <form class="form-signup">
+                                <label for="SignUpName">Name</label>
+                                <input type="name" id="SignUpName" class="form-control hide-alert" placeholder="Name">
+                                <label for="SignUpEmail">Email</label>
+                                <input type="email" id="SignUpEmail" class="form-control hide-alert" placeholder="Email">
+                                <label for="SignUpPassword">Password</label>
+                                <input type="password" id="SignUpPassword" class="form-control hide-alert" placeholder="Password"/>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signupbtn">Sign Up</button>
+                            </form>
+                            <button type="button" class="btn btn-lg btn-primary btn-block" id="googlebtn">Sign Up with Google+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			firebase.initializeApp(config);
-			const auth = firebase.auth();
-			var provider = new firebase.auth.GoogleAuthProvider();
-			
-			$('.form-signin').on('submit', event => {
-                event.preventDefault();
-                const email = document.getElementById("LogInEmail").value;
-                const pass = document.getElementById("LogInPassword").value;
-                const promise = auth.signInWithEmailAndPassword(email,pass);
-                promise.catch(e  => {
-                    var errorCode = e.code;
-                    var errorMessage = e.message;
-                    
-                    if (errorCode == 'auth/wrong-password') {
-                        $('#err-msg').html("Invalid password!");
-                    } 
-                    else if(errorCode == 'auth/invalid-email'){
-                        $('#err-msg').html("Invalid email");
-                    }
-                    else if(errorCode == 'auth/user-not-found'){
-                        $('#err-msg').html("User not found!");
-                    }
-                    else {
-                        $('#err-msg').html(errorMessage);
-                    }
-                    $("#login-error").css("visibility","visible");
-                    console.log(errorMessage);
-                });
-				
-			});	
+        <!--Bootstrap JS-->
+        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+        <script type="text/javascript">
 
-			$('.form-signup').on('submit', event => {
-                
-                event.preventDefault();
-                const email = document.getElementById("SignUpEmail").value;
-                const pass = document.getElementById("SignUpPassword").value;
-                const promise = auth.createUserWithEmailAndPassword(email,pass);
-                //auth.signInWithEmailAndPassword(email,pass);
-                promise.catch(e  => {
-                    var errorCode = e.code;
-                    var errorMessage = e.message;
-                    
-                    if (errorCode == 'auth/email-already-in-use') {
-                        $('#err-msg').html("Email already in use");
-                    } 
-                    else if(errorCode == 'auth/invalid-email'){
-                        $('#err-msg').html("Invalid email");
-                    }
-                    else if(errorCode == 'auth/weak-password'){
-                        $('#err-msg').html("Password too weak!");
-                    }
-                    else {
-                        $('#err-msg').html(errorMessage);
-                    }
-                    $("#login-error").css("visibility","visible");
-                    console.log(errorMessage);
-                });
-			});
-			
-			$('#googlebtn').click(function() {
-				firebase.auth().signInWithPopup(provider);				
-			});
+        var config = {
+        apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
+        authDomain: "nbadex-ff8cf.firebaseapp.com",
+        databaseURL: "https://nbadex-ff8cf.firebaseio.com",
+        storageBucket: "nbadex-ff8cf.appspot.com",
+        messagingSenderId: "172457613001"
+        };
 
-            firebase.auth().onAuthStateChanged(user => {
-                if(user){
-                    console.log('hi');
-                    console.log(user);
-                    window.location = 'views/myTeam.html'
+        firebase.initializeApp(config);
+        const auth = firebase.auth();
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        $('.form-signin').on('submit', event => {
+            event.preventDefault();
+            const email = document.getElementById("LogInEmail").value;
+            const pass = document.getElementById("LogInPassword").value;
+            const promise = auth.signInWithEmailAndPassword(email,pass);
+            promise.catch(e  => {
+                var errorCode = e.code;
+                var errorMessage = e.message;
+
+                if (errorCode == 'auth/wrong-password') {
+                    $('#err-msg').html("Invalid password!");
+                } 
+                else if(errorCode == 'auth/invalid-email'){
+                    $('#err-msg').html("Invalid email");
                 }
+                else if(errorCode == 'auth/user-not-found'){
+                    $('#err-msg').html("User not found!");
+                }
+                else {
+                    $('#err-msg').html(errorMessage);
+                }
+                $("#login-error").css("visibility","visible");
+                console.log(errorMessage);
             });
-                
-            $('.alert .close').on('click', function(e) {
-                $(this).parent().hide();
+
+        });	
+
+        $('.form-signup').on('submit', event => {
+
+            event.preventDefault();
+            const email = document.getElementById("SignUpEmail").value;
+            const pass = document.getElementById("SignUpPassword").value;
+            const promise = auth.createUserWithEmailAndPassword(email,pass);
+            //auth.signInWithEmailAndPassword(email,pass);
+            promise.catch(e  => {
+                var errorCode = e.code;
+                var errorMessage = e.message;
+
+                if (errorCode == 'auth/email-already-in-use') {
+                    $('#err-msg').html("Email already in use");
+                } 
+                else if(errorCode == 'auth/invalid-email'){
+                    $('#err-msg').html("Invalid email");
+                }
+                else if(errorCode == 'auth/weak-password'){
+                    $('#err-msg').html("Password too weak!");
+                }
+                else {
+                    $('#err-msg').html(errorMessage);
+                }
+                $("#login-error").css("visibility","visible");
+                console.log(errorMessage);
             });
-                
-            $("#close-btn").click(function(){
-                $("#login-error").css("visibility","hidden");
-            });
-            $(".hide-alert").focusin(function(){
-                $("#login-error").css("visibility","hidden");
-            });
-                
-			</script>
-		</body>
-	</html>
+        });
+
+        $('#googlebtn').click(function() {
+            firebase.auth().signInWithPopup(provider);				
+        });
+
+        firebase.auth().onAuthStateChanged(user => {
+            if(user){
+                console.log('hi');
+                console.log(user);
+                window.location = 'views/myTeam.html'
+            }
+        });
+
+        $('.alert .close').on('click', function(e) {
+            $(this).parent().hide();
+        });
+
+        $("#close-btn").click(function(){
+            $("#login-error").css("visibility","hidden");
+        });
+        $(".hide-alert").focusin(function(){
+            $("#login-error").css("visibility","hidden");
+        });
+
+        </script>
+    </body>
+</html>
 	
