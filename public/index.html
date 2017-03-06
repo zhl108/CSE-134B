@@ -73,6 +73,7 @@
 
 			firebase.initializeApp(config);
 			const auth = firebase.auth();
+			var provider = new firebase.auth.GoogleAuthProvider();
 			
 			$('.form-signin').on('submit', event => {
 			event.preventDefault();
