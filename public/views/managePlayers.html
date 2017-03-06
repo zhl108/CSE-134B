@@ -12,6 +12,7 @@
 	<title>AllPlayers</title>
 </head>
 <body>
+    <div id="app">
 	<nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -61,7 +62,7 @@
                                         </div>
                                     </div>
                                     <br><br>
-                                    <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                                    <button v-on:click="addNewPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
                                     <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal" id="bot-btn">Cancel</button> 
                                 </div>
                                 <div class="input_group col-md-8">
@@ -124,11 +125,6 @@
 			</div>
 		</div>
 	</div>
-    <div id="app">
-        <li v-for="player in players">
-            {{ player.name }}
-        </li>
-    </div>
 	<div class="container">
 		<table class="table table-striped table-hover table-condensed">
 			<caption>List of all NBA players available to add to your team</caption>
@@ -148,24 +144,21 @@
 				</tr>
 			</thead>
 			<tbody>
-                <div id="app">
-    				<tr v-for="player in players">
-                        <td>{{ player.name }}</td>
-    					<td>{{ player.name }}</td>
-    					<td>{{ player.position }}</td>
-                        <td>{{ player.ppg }}</td>
-    					<td>{{ player.fgp }}</td>
-    					<td>{{ player.apg }}</td>
-    					<td>{{ player.rpg }}</td>
-    					<td>{{ player.spg }}</td>
-    					<td>{{ player.bpg }}</td>
-    					<td>{{ player.per }}</td>
-    					<td>{{ player.price }}</td>
-    					<td>
-    						<button class="AddPlayerBtn">Add</button>
-    					</td>
-    				</tr>
-                </div>
+				<tr v-for="player in players">
+                    <td>{{ player.name }}</td>
+					<td>{{ player.position }}</td>
+                    <td>{{ player.pointsPerGame }}</td>
+					<td>{{ player.fieldGoalPercentage }}</td>
+					<td>{{ player.assistsPerGame }}</td>
+					<td>{{ player.reboundsPerGame }}</td>
+					<td>{{ player.stealsPerGame }}</td>
+					<td>{{ player.blocksPerGame }}</td>
+					<td>{{ player.playerEfficiencyRating }}</td>
+					<td>{{ player.price }}</td>
+					<td>
+						<button class="AddPlayerBtn">Add</button>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
@@ -184,9 +177,11 @@
 			</div>
 		</div>
 	</footer>
+    </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 <script type="text/javascript">
+
 var config = {
 	apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
 	authDomain: "nbadex-ff8cf.firebaseapp.com",
@@ -210,57 +205,12 @@ firebase.auth().onAuthStateChanged(user => {
 	if(user){
 		console.log('hi');
 		console.log(user);
-                    //window.location = 'myTeamBootstrap.html'
-                }else{
-                	window.location = '../index.html';
-                }
-            });
-  $('.form-player').on('submit', event => {
-    event.preventDefault();
-
-    /*Get name of img File*/
-    var img = $("input:file");
-    //console.log(img[0]);
-    var imgNames = img[0].value.split('\\');
-    const imgName = imgNames[imgNames.length-1];
-    var imgFile = document.getElementById("imgFile").files[0];
-    const names = document.getElementById("name").value;
-    const pos = document.getElementById("position").value;
-    const ppg = document.getElementById("PPG").value;
-    const fg = document.getElementById("FG").value;
-    const apg = document.getElementById("APG").value;
-    const rpg = document.getElementById("RPG").value;
-    const spg = document.getElementById("SPG").value;
-    const bpg = document.getElementById("BPG").value;
-    const per = document.getElementById("PER").value;
-    const price = document.getElementById("Price").value;
-
-    const firstName = names.split(" ")[0];
-    const lastName = names.split(" ")[1];
-    const playerPath = "Players/" + firstName + lastName;
-
-    var database = firebase.database();
-    database.ref('players/'+firstName+lastName).set({
-        name: names,
-        position: pos,
-        pointsPerGame: ppg,
-        fieldGoalPercentage: fg,
-        assistsPerGame: apg,
-        reboundsPerGame: rpg,
-        stealsPerGame: spg,
-        blocksPerGame: bpg,
-        playerEfficiencyRating: per,
-        price: price
-    });
-
-    var playerRef = firebase.storage().ref(playerPath);
-
-    var imgRef = playerRef.child(imgName);
-    imgRef.put(imgFile);
-    var nameRef = playerRef.child(firstName+lastName);
-    nameRef.putString(firstName+lastName);
-
-  }); 
+        //window.location = 'myTeamBootstrap.html'
+    }
+    else {
+    	window.location = '../index.html';
+    }
+});
 
 var playersRef = firebase.database().ref('players');
 
@@ -268,9 +218,52 @@ var app = new Vue({
     el: '#app',
     firebase: {
         players: playersRef
+    },
+    methods: {
+        addNewPlayer: function() {
+            var img = $("input:file");
+            //console.log(img[0]);
+            var imgNames = img[0].value.split('\\');
+            const imgName = imgNames[imgNames.length-1];
+            var imgFile = document.getElementById("imgFile").files[0];
+            const names = document.getElementById("name").value;
+            const pos = document.getElementById("position").value;
+            const ppg = document.getElementById("PPG").value;
+            const fg = document.getElementById("FG").value;
+            const apg = document.getElementById("APG").value;
+            const rpg = document.getElementById("RPG").value;
+            const spg = document.getElementById("SPG").value;
+            const bpg = document.getElementById("BPG").value;
+            const per = document.getElementById("PER").value;
+            const price = document.getElementById("Price").value;
+
+            const firstName = names.split(" ")[0];
+            const lastName = names.split(" ")[1];
+            const playerPath = "Players/" + firstName + lastName;
+
+            var database = firebase.database();
+            database.ref('players/'+firstName+lastName).set({
+                name: names,
+                position: pos,
+                pointsPerGame: ppg,
+                fieldGoalPercentage: fg,
+                assistsPerGame: apg,
+                reboundsPerGame: rpg,
+                stealsPerGame: spg,
+                blocksPerGame: bpg,
+                playerEfficiencyRating: per,
+                price: price
+            });
+
+            var playerRef = firebase.storage().ref(playerPath);
+
+            var imgRef = playerRef.child(imgName);
+            imgRef.put(imgFile);
+            var nameRef = playerRef.child(firstName+lastName);
+            nameRef.putString(firstName+lastName);
+        }
     }
 });
-
 
 </script>
 </html>
