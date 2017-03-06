@@ -26,3 +26,18 @@ ul li a{
     position: relative;
     top: 30px;
 }
+
+.form-player.container-fluid{
+    background:transparent;
+}
+
+.form-control{
+    margin-bottom: 3px;
+}
+
+.btn-block{
+    max-width: 250px;
+}
+#bot-btn{
+    margin-bottom: 5px;
+}
