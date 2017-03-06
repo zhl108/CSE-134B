@@ -157,7 +157,7 @@
 					<td>{{ player.playerEfficiencyRating }}</td>
 					<td>{{ player.price }}</td>
 					<td>
-						<button class="EditPlayerBtn" data-toggle="modal" data-target="#editPlayerModal">Update</button>
+						<button class="EditPlayerBtn" v-on:click="populate(player)" data-toggle="modal" data-target="#editPlayerModal">Update</button>
 					</td>
                     <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="deletePlayer(player)"></span></td>
                     <div class="modal fade" id="editPlayerModal" tabindex="-1" role="dialog">
@@ -166,7 +166,7 @@
                                 <div class="modal-header">
                                     <div class="container-fluid" style="background:transparent;">
                                         <div class="row" style="display: flex; aglign-items: center">
-                                            <h4 class="col-md-11">Edit player</h4>
+                                            <h4 class="col-md-11">Edit Player</h4>
                                             <button type="button" class="close col-md-1" data-dismiss="modal">&times;</button>
                                         </div>
                                     </div>
@@ -176,64 +176,64 @@
                                         <div class="row">
                                             <div class="col-md-offset-0 col-md-4">
                                                 <div class="thumbnail" style="max-height:250px;max-width:250px;">
-                                                    <img src="../img/avatar.jpg" alt="Upload player avatar" id="playerImg" class="img-responsive">
+                                                    <img id="editImg" src="../img/avatar.jpg" alt="Upload player avatar" id="playerImg" class="img-responsive">
                                                     <div class="caption">
                                                         <input type="file" value="upload" id="imgFile"/>
                                                     </div>
                                                 </div>
                                                 <br><br>
-                                                <button v-on:click="editPlayer" v-on:keyup.enter="editPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                                                <button v-on:click="editPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
                                                 <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal" id="bot-btn">Cancel</button> 
                                             </div>
                                             <div class="input_group col-md-8">
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="name" placeholder="Name">
+                                                        <input disabled type="text" class="form-control" id="editName" placeholder="Name">
                                                     </div>
                                                     <br>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="position" placeholder="Position">
+                                                            <input type="text" class="form-control" id="editPosition" placeholder="Position">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="PPG" placeholder="Point per game">
+                                                            <input type="text" class="form-control" id="editPPG" placeholder="Point per game">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="FG" placeholder="Field Goal %">
+                                                            <input type="text" class="form-control" id="editFG" placeholder="Field Goal %">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="APG" placeholder="Asists per game">
+                                                            <input type="text" class="form-control" id="editAPG" placeholder="Asists per game">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="RPG" placeholder="Rebound per game">
+                                                            <input type="text" class="form-control" id="editRPG" placeholder="Rebound per game">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="SPG" placeholder="Steal per game">
+                                                            <input type="text" class="form-control" id="editSPG" placeholder="Steal per game">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="BPG" placeholder="Block per game">
+                                                            <input type="text" class="form-control" id="editBPG" placeholder="Block per game">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="PER" placeholder="Player efficiency rating">
+                                                            <input type="text" class="form-control" id="editPER" placeholder="Player efficiency rating">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="Price" placeholder="Price">
+                                                            <input type="text" class="form-control" id="editPrice" placeholder="Price">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -314,15 +314,6 @@ var app = new Vue({
             const imgName = imgNames[imgNames.length-1];
             var imgFile = document.getElementById("imgFile").files[0];
             const names = document.getElementById("name").value;
-            const pos = document.getElementById("position").value;
-            const ppg = document.getElementById("PPG").value;
-            const fg = document.getElementById("FG").value;
-            const apg = document.getElementById("APG").value;
-            const rpg = document.getElementById("RPG").value;
-            const spg = document.getElementById("SPG").value;
-            const bpg = document.getElementById("BPG").value;
-            const per = document.getElementById("PER").value;
-            const price = document.getElementById("Price").value;
 
             const firstName = names.split(" ")[0];
             const lastName = names.split(" ")[1];
@@ -331,15 +322,15 @@ var app = new Vue({
             var database = firebase.database();
             database.ref('players/'+firstName+lastName).set({
                 name: names,
-                position: pos,
-                pointsPerGame: ppg,
-                fieldGoalPercentage: fg,
-                assistsPerGame: apg,
-                reboundsPerGame: rpg,
-                stealsPerGame: spg,
-                blocksPerGame: bpg,
-                playerEfficiencyRating: per,
-                price: price
+                position: document.getElementById("position").value,
+                pointsPerGame: document.getElementById("PPG").value,
+                fieldGoalPercentage: document.getElementById("FG").value,
+                assistsPerGame: document.getElementById("APG").value,
+                reboundsPerGame: document.getElementById("RPG").value,
+                stealsPerGame: document.getElementById("SPG").value,
+                blocksPerGame: document.getElementById("BPG").value,
+                playerEfficiencyRating: document.getElementById("PER").value,
+                price: document.getElementById("Price").value
             });
 
             var playerRef = firebase.storage().ref(playerPath);
@@ -349,7 +340,35 @@ var app = new Vue({
             var nameRef = playerRef.child(firstName+lastName);
             nameRef.putString(firstName+lastName);
         },
+        populate: function(player) {
+            document.getElementById("editName").value = player.name;
+            document.getElementById("editPosition").value = player.position;
+            document.getElementById("editPPG").value = player.pointsPerGame;
+            document.getElementById("editFG").value = player.fieldGoalPercentage;
+            document.getElementById("editAPG").value = player.assistsPerGame;
+            document.getElementById("editRPG").value = player.reboundsPerGame;
+            document.getElementById("editSPG").value = player.stealsPerGame;
+            document.getElementById("editBPG").value = player.blocksPerGame;
+            document.getElementById("editPrice").value = player.price;
+            document.getElementById("editPER").value = player.playerEfficiencyRating;
+        },
         editPlayer: function() {
+            names = document.getElementById("editName").value;
+            const firstName = names.split(" ")[0];
+            const lastName = names.split(" ")[1];
+
+            var database = firebase.database();
+            database.ref('players/'+firstName+lastName).update({
+                position: document.getElementById("editPosition").value,
+                pointsPerGame: document.getElementById("editPPG").value,
+                fieldGoalPercentage: document.getElementById("editFG").value,
+                assistsPerGame: document.getElementById("editAPG").value,
+                reboundsPerGame: document.getElementById("editRPG").value,
+                stealsPerGame: document.getElementById("editSPG").value,
+                blocksPerGame: document.getElementById("editBPG").value,
+                playerEfficiencyRating: document.getElementById("editPER").value,
+                price: document.getElementById("editPrice").value
+            });
             console.log("updating")
         },
         deletePlayer: function(player) {
