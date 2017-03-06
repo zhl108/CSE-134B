@@ -150,10 +150,57 @@
                     console.log('hi');
                     console.log(user);
                     //window.location = 'myTeamBootstrap.html'
+                    //get user's info
+                    var name, email, photoUrl, uid, emailVerified;
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid; 
+
+                    //alert(id);
+                    var usersRef = firebase.database().ref('users');
+                    usersRef.once('value', function(snapshot) {
+                        if (snapshot.hasChild(uid)) {
+                            alert(uid);
+                        }
+                        else {
+                            alert("non-exist: "+uid);
+                        }
+                    });
                 }else{
                 	window.location = '../index.html';
                 }
             });
+        
+            //Below is the modification for creating user directory in database, and for further operation
+            var user = firebase.auth().currentUser;
+            //to get the user id (uid) from the auth user
+            if(user != null){
+
+                var email, uid;
+                email = user.email;
+                uid = user.uid; 
+
+                //
+                var usersRef = firebase.database().ref('users');
+                
+                //check if user/ has a child node with the name of uid
+                usersRef.once('value', function(snapshot) {
+                    if (snapshot.hasChild(uid)) {
+                        alert(uid);
+                        //if the uid folder exist, get the player data from this folder and do further operation
+                    }
+                    else {
+                        //if there the current uid folder does NOT exist, create one for it
+                        alert("non-exist: "+uid);
+                        var tempJson = {};
+                        tempJson[uid] = {};
+                        firebase.database().ref('users').set(tempJson);
+                    }
+                }); 
+            }
+
 
 	</script>
 
