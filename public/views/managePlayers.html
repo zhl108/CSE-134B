@@ -140,7 +140,7 @@
 					<th>BPG</th>
 					<th>PER</th>
 					<th>Price</th>
-					<th>Add Player</th>
+					<th>Edit Player</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -156,11 +156,96 @@
 					<td>{{ player.playerEfficiencyRating }}</td>
 					<td>{{ player.price }}</td>
 					<td>
-						<button class="AddPlayerBtn">Add</button>
+						<button class="EditPlayerBtn" data-toggle="modal" data-target="#editPlayerModal">Update</button>
 					</td>
+                    <div class="modal fade" id="editPlayerModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="container-fluid" style="background:transparent;">
+                                        <div class="row" style="display: flex; aglign-items: center">
+                                            <h4 class="col-md-11">Edit player</h4>
+                                            <button type="button" class="close col-md-1" data-dismiss="modal">&times;</button>
+                                        </div>
+                                    </div>
+                                </div>            
+                                <div class="modal-body">
+                                    <form class="form-player container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-offset-0 col-md-4">
+                                                <div class="thumbnail" style="max-height:250px;max-width:250px;">
+                                                    <img src="../img/avatar.jpg" alt="Upload player avatar" id="playerImg" class="img-responsive">
+                                                    <div class="caption">
+                                                        <input type="file" value="upload" id="imgFile"/>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                                <button v-on:click="editPlayer" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                                                <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal" id="bot-btn">Cancel</button> 
+                                            </div>
+                                            <div class="input_group col-md-8">
+                                                <div class="form-group">
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="name" placeholder="Name">
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="position" placeholder="Position">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="PPG" placeholder="Point per game">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="FG" placeholder="Field Goal %">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="APG" placeholder="Asists per game">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="RPG" placeholder="Rebound per game">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="SPG" placeholder="Steal per game">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="BPG" placeholder="Block per game">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="PER" placeholder="Player efficiency rating">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="Price" placeholder="Price">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</tr>
 			</tbody>
 		</table>
+        
 	</div>
 	<footer class="footer">
 		<div class="container-fluid">
@@ -220,7 +305,8 @@ var app = new Vue({
         players: playersRef
     },
     methods: {
-        addNewPlayer: function() {
+        addNewPlayer: function(event) {
+            if (event) event.preventDefault();
             var img = $("input:file");
             //console.log(img[0]);
             var imgNames = img[0].value.split('\\');
@@ -261,6 +347,9 @@ var app = new Vue({
             imgRef.put(imgFile);
             var nameRef = playerRef.child(firstName+lastName);
             nameRef.putString(firstName+lastName);
+        },
+        editPlayer: function() {
+            console.log("updating")
         }
     }
 });
