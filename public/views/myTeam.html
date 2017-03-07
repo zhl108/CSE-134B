@@ -173,7 +173,7 @@
                             tempJson[uid] = {'username': email};
 
                             var database = firebase.database();
-                            database.ref('users').set(tempJson);
+                            database.ref('users').update(tempJson);
                         }
                     }); 
                     
