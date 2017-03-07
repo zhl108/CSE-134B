@@ -178,7 +178,7 @@
                                                 <div class="thumbnail" style="max-height:250px;max-width:250px;">
                                                     <img id="editImg" src="../img/avatar.jpg" alt="Upload player avatar" id="playerImg" class="img-responsive">
                                                     <div class="caption">
-                                                        <input type="file" value="upload" id="imgFile"/>
+                                                        <input type="file" value="upload" id="imgFileEdit"/>
                                                     </div>
                                                 </div>
                                                 <br><br>
@@ -307,7 +307,7 @@ var app = new Vue({
         players: playersRef
     },
     methods: {
-        addNewPlayer: function(event) {
+        addNewPlayer: function() {
             if (event) event.preventDefault();
             var img = $("input:file");
             //console.log(img[0]);
@@ -354,6 +354,7 @@ var app = new Vue({
                 var img = document.getElementById("editImg");
                 img.src = url;
             });
+			
             document.getElementById("editName").value = player.name;
             document.getElementById("editPosition").value = player.position;
             document.getElementById("editPPG").value = player.pointsPerGame;
@@ -383,6 +384,19 @@ var app = new Vue({
                 playerEfficiencyRating: document.getElementById("editPER").value,
                 price: document.getElementById("editPrice").value
             });
+			
+			var imgFile = document.getElementById("imgFileEdit").files[0];
+			console.log(imgFile);
+            const playerPath = "Players/" + firstName + lastName;
+            var playerRef = firebase.storage().ref(playerPath);
+            name = firstName+lastName
+            lowername = name.toLowerCase();
+            var imgRef = playerRef.child(lowername);
+            imgRef.put(imgFile).then(function() {
+                console.log("picture upload complete");
+            });
+			
+			
             console.log("updating")
         },
         deletePlayer: function(player) {
@@ -393,7 +407,7 @@ var app = new Vue({
             const lastName = names.split(" ")[1];
             name = firstName+lastName;
             lowername = name.toLowerCase();
-            firebase.storage().ref('Players/'+name).child(lowername).delete()
+            firebase.storage().ref('Players/'+name).child(lowername).delete();
 
             console.log("deleted " + player.name);
         }
