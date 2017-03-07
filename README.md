@@ -1,4 +1,7 @@
 #NBA-DEX
+https://nba-dex.firebaseapp.com/
+
+Prototype for Authentication/CRUD functionality
 
 https://nbadex-ff8cf.firebaseapp.com/
 
