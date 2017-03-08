@@ -1,6 +1,5 @@
 *{
   font-family: 'Roboto', sans-serif;
-  margin: 0;
 }
 .nav, .container-fluid{
 	background-color: #111111;
@@ -21,12 +20,6 @@ ul li a{
 	text-align:center;
 }
 
-.create{
-    
-    position: relative;
-    top: 30px;
-}
-
 .form-player.container-fluid{
     background:transparent;
 }
@@ -44,4 +37,9 @@ ul li a{
 
 .caption{
     margin-top: 5px;
+}
+
+.vcenter{
+    display: flex;
+    align-items: center;
 }
