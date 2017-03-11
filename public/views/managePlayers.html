@@ -431,18 +431,12 @@ var app = new Vue({
             user = firebase.auth().currentUser;
             name = playerS.name.split(" ")[0] + playerS.name.split(" ")[1];
             lowername = name.toLowerCase();
-            var playerimgURL = null;
             firebase.storage().ref('Players/' + name).child(lowername).getDownloadURL().then(function(url){
-                playerimgURL = url;
-                console.log(url);
                 firebase.database().ref('users/'+user.uid).once('value').then(function(snapshot){
                     var i = 1;
                     while(i<=10){
                         var player = snapshot.child('player'+i).val();
-                        var key = snapshot.child('player'+i).key;
-                        //console.log(key);
                         if(player.playerName=='Choose Player'){
-                            console.log('player' + i);
                             updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position);
                             return;
                         }
@@ -450,35 +444,18 @@ var app = new Vue({
                     }
                 });
             });
-
-                /*
-                snapshot.forEach(function (childSnapshot){
-                    var player = childSnapshot.val();
-                    //name = playerS.name.split(" ")[0] + playerS.name.split(" ")[1];
-
-                    if(player.playerName=='Choose Player'){
-                        console.log(playerS.name);
-                        name = playerS.name.split(" ")[0] + playerS.name.split(" ")[1];
-                        lowername = name.toLowerCase();
-                        firebase.storage().ref('Players/'+name).child(lowername).getDownloadURL().then(function(url) {
-                            playerimgURL = url;
-                            updateUserTeam(user.uid, childSnapshot.key, url, playerS.name, playerS.position);
-                            return true;
-                        });
-                    }
-                });*/
         }
     }
     });
-        function updateUserTeam(uid, playerKey, imgUrl, name, pos){
-            firebase.database().ref('users/' + uid + '/' + playerKey).update({
-                img: imgUrl,
-                playerName: name,
-                position: pos
-            }).then(function(){
-                return true;
-            });
-        }
+    function updateUserTeam(uid, playerKey, imgUrl, name, pos){
+        firebase.database().ref('users/' + uid + '/' + playerKey).update({
+        img: imgUrl,
+        playerName: name,
+        position: pos
+        }).then(function(){
+           return true;
+       });
+   };
 
 </script>
 </html>

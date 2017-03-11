@@ -217,79 +217,26 @@
                         					player10};
                             var database = firebase.database();
                             database.ref('users').update(tempJson);
-                            //populateTeam(uid);
                         }
                     });
 
                     function populateTeam(uid){
                     	firebase.database().ref('users/'+uid).once('value').then(function(snapshot){
-                    		//var i = 1;
                     		snapshot.forEach(function(childSnapshot){
                     			if((childSnapshot.key).includes('player')){
-                    				//var player = childSnapshot.val();
                     				var player = document.getElementById(childSnapshot.key);
                     				player.children[0].innerHTML = childSnapshot.val().position;
                     				player.children[1].src = childSnapshot.val().img;
                     				player.children[2].innerHTML = childSnapshot.val().playerName;
                     			}
-                    			//i++;
-                    			//var player = childSnapshot.val();
                     		});
                     	});
-
-                    	/*
-                    	firebase.database().ref('users/'+uid).once('value').then(function(snapshot) {
-                			var player1 = document.getElementById("player1");
-                			player1.children[0].innerHTML = snapshot.val().player1.position;
-                			player1.children[1].src = snapshot.val().player1.img;
-                			console.log(snapshot.val().player1.img);
-                			player1.children[2].innerHTML = snapshot.val().player1.playerName;
-                			var player2 = document.getElementById("player2");
-                			player2.children[0].innerHTML = snapshot.val().player2.position;
-                			player2.children[1].src = snapshot.val().player2.img;
-                			player2.children[2].innerHTML = snapshot.val().player2.playerName;
-                			var player3 = document.getElementById("player3");
-                			player3.children[0].innerHTML = snapshot.val().player3.position;
-                			player3.children[1].src = snapshot.val().player3.img;
-                			player3.children[2].innerHTML = snapshot.val().player3.playerName;
-                			var player4 = document.getElementById("player4");
-                			player4.children[0].innerHTML = snapshot.val().player4.position;
-                			player4.children[1].src = snapshot.val().player4.img;
-                			player4.children[2].innerHTML = snapshot.val().player4.playerName;
-                			var player5 = document.getElementById("player5");
-                			player5.children[0].innerHTML = snapshot.val().player5.position;
-                			player5.children[1].src = snapshot.val().player5.img;
-                			player5.children[2].innerHTML = snapshot.val().player5.playerName;
-                			var player6 = document.getElementById("player6");
-                			player6.children[0].innerHTML = snapshot.val().player6.position;
-                			player6.children[1].src = snapshot.val().player6.img;
-                			player6.children[2].innerHTML = snapshot.val().player6.playerName;
-                			var player7 = document.getElementById("player7");
-                			player7.children[0].innerHTML = snapshot.val().player7.position;
-                			player7.children[1].src = snapshot.val().player7.img;
-                			player7.children[2].innerHTML = snapshot.val().player7.playerName;
-                			var player8 = document.getElementById("player8");
-                			player8.children[0].innerHTML = snapshot.val().player8.position;
-                			player8.children[1].src = snapshot.val().player8.img;
-                			player8.children[2].innerHTML = snapshot.val().player8.playerName;
-                			var player9 = document.getElementById("player9");
-                			player9.children[0].innerHTML = snapshot.val().player9.position;
-                			player9.children[1].src = snapshot.val().player9.img;
-                			player9.children[2].innerHTML = snapshot.val().player9.playerName;
-                			var player10 = document.getElementById("player10");
-                			player10.children[0].innerHTML = snapshot.val().player10.position;
-                			player10.children[1].src = snapshot.val().player10.img;
-                			player10.children[2].innerHTML = snapshot.val().player10.playerName;
-            			});*/
                     } 
                 }
                 else{
                 	window.location = '../index.html';
                 }
             });
-        
-
-
 	</script>
 
 </body>
