@@ -33,78 +33,78 @@
 	        </div>
 	    </nav>
 	    <div class="container">
-	    	<h1>Your Team</h1>
+	    	<h1 id="teamName"></h1>
 				<div class="row first">
 					<div class="col-md-2 col-md-offset-1">
-						<div class="centerBlock">
-							<label>Point Guard</label>
-							<img src="http://specials-images.forbesimg.com/imageserve/499832138/960x0.jpg?fit=scale7" class="img-responsive"/>
-							<label>Russell Westbrook</label>
+						<div class="centerBlock" id="player1">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2 ">
-						<div class="centerBlock">
-							<label>Shooting Guard</label>
-							<img src="http://www.ferrdi.com/wp-content/uploads/2017/01/Harden.jpg" class="img-responsive"/>
-							<label>James Harden</label>
+						<div class="centerBlock" id="player2">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Small Forward</label>
-							<img src="http://image.nj.com/home/njo-media/width960/img/njcom_photos/photo/2014/06/30/-a91143a0ce4fb0bd.JPG" class="img-responsive"/>
-							<label>LeBron James</label>
+						<div class="centerBlock" id="player3">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Power Forward</label>
-							<img src="http://images.covers.com/editorial/2012/383x165/blake_griffin021912.jpg" class="img-responsive"/>
-							<label>Blake Griffin</label>
+						<div class="centerBlock" id="player4">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Center</label>
-							<img src="http://images.covers.com/editorial/2011/383x165/dwight_howard112911.jpg" class="img-responsive"/>
-							<label>Dwight Howard</label>
+						<div class="centerBlock" id="player5">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 				</div>
 				<div class="row second">
 					<div class="col-md-2 col-md-offset-1">
-						<div class="centerBlock">
-							<label>Reserve 1</label>
-							<img src="http://media.philstar.com/images/the-philippine-star/sports/20161027/ps-jeremy-lin.jpg" class="img-responsive"/>
-							<label>Jeremy Lin</label>
+						<div class="centerBlock" id="player6">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Reserve 2</label>
-							<img src="http://www.trendingtoplists.com/wp-content/uploads/2015/05/ManuIsThinking_0.jpg" class="img-responsive"/>
-							<label>Manu Ginobili</label>
+						<div class="centerBlock" id="player7">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Reserve 3</label>
-							<img src="https://usatfantasy.files.wordpress.com/2015/11/ricky-rubio-minnestoa-timberwolves_102815.jpg?w=1000&h=700" class="img-responsive"/>
-							<label>Ricky Rubio</label>
+						<div class="centerBlock" id="player8">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Reserve 4</label>
-							<img src="http://media.philstar.com/images/the-philippine-star/sports/20170103/jimmy-butler-nba-bulls.jpg" class="img-responsive"/>
-							<label>Jimmy Butler</label>
+						<div class="centerBlock" id="player9">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<div class="centerBlock">
-							<label>Reserve 5</label>
-							<img src="https://ipacers.files.wordpress.com/2015/11/111815_paul-george_1200.jpg?w=1000&h=700&crop=1" class="img-responsive"/>
-							<label>Paul George</label>
+						<div class="centerBlock" id="player10">
+							<label>Position</label>
+							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<label>Choose Player</label>
 						</div>
 					</div>
 				</div>
@@ -149,7 +149,8 @@
             firebase.auth().onAuthStateChanged(user => {
                 if(user){
                     var user = firebase.auth().currentUser;
-                    //to get the user id (uid) from the auth user
+                    var teamName = "Team " + user.displayName;
+                    document.getElementById("teamName").innerHTML = teamName;
 
                     var email, uid;
                     email = user.email;
@@ -165,22 +166,122 @@
                             //alert("exist: "+uid);
                             
                             //TODO: if the uid folder exist, get the player data from this folder and do further operation
+                            populateTeam(uid);
                         }
                         else {
                             //if there the current uid folder does NOT exist, create one for it
                             //TODO: create uid folder can be transfer to sign up page later
                             //alert("non-exist: "+uid);
                             var tempJson = {};
-                            tempJson[uid] = {'username': email};
-
+                            var tempPic = '../img/avatar.jpg';
+                            var player1 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            				,'position': 'Position'};
+                            var player2 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};
+                            var player3 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};
+                            var player4 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};
+                            var player5 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'}; 
+                            var player6 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};
+                            var player7 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};                            				                           			
+                            var player8 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};  
+                            var player9 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};  
+                            var player10 = {'playerName': 'Choose Player',
+                            				'img': tempPic
+                            			,'position': 'Position'};                              				                            				
+                            tempJson[uid] = {'username': email,
+                        					player1,
+                        					player2,
+                        					player3,
+                        					player4,
+                        					player5,
+                        					player6,
+                        					player7,
+                        					player8,
+                        					player9,
+                        					player10};
                             var database = firebase.database();
                             database.ref('users').update(tempJson);
+                            //populateTeam(uid);
                         }
-                    }); 
-                    
-                    console.log('hi');
-                    console.log(user);
-                    //window.location = 'myTeamBootstrap.html'
+                    });
+
+                    function populateTeam(uid){
+                    	firebase.database().ref('users/'+uid).once('value').then(function(snapshot){
+                    		//var i = 1;
+                    		snapshot.forEach(function(childSnapshot){
+                    			if((childSnapshot.key).includes('player')){
+                    				//var player = childSnapshot.val();
+                    				var player = document.getElementById(childSnapshot.key);
+                    				player.children[0].innerHTML = childSnapshot.val().position;
+                    				player.children[1].src = childSnapshot.val().img;
+                    				player.children[2].innerHTML = childSnapshot.val().playerName;
+                    			}
+                    			//i++;
+                    			//var player = childSnapshot.val();
+                    		});
+                    	});
+
+                    	/*
+                    	firebase.database().ref('users/'+uid).once('value').then(function(snapshot) {
+                			var player1 = document.getElementById("player1");
+                			player1.children[0].innerHTML = snapshot.val().player1.position;
+                			player1.children[1].src = snapshot.val().player1.img;
+                			console.log(snapshot.val().player1.img);
+                			player1.children[2].innerHTML = snapshot.val().player1.playerName;
+                			var player2 = document.getElementById("player2");
+                			player2.children[0].innerHTML = snapshot.val().player2.position;
+                			player2.children[1].src = snapshot.val().player2.img;
+                			player2.children[2].innerHTML = snapshot.val().player2.playerName;
+                			var player3 = document.getElementById("player3");
+                			player3.children[0].innerHTML = snapshot.val().player3.position;
+                			player3.children[1].src = snapshot.val().player3.img;
+                			player3.children[2].innerHTML = snapshot.val().player3.playerName;
+                			var player4 = document.getElementById("player4");
+                			player4.children[0].innerHTML = snapshot.val().player4.position;
+                			player4.children[1].src = snapshot.val().player4.img;
+                			player4.children[2].innerHTML = snapshot.val().player4.playerName;
+                			var player5 = document.getElementById("player5");
+                			player5.children[0].innerHTML = snapshot.val().player5.position;
+                			player5.children[1].src = snapshot.val().player5.img;
+                			player5.children[2].innerHTML = snapshot.val().player5.playerName;
+                			var player6 = document.getElementById("player6");
+                			player6.children[0].innerHTML = snapshot.val().player6.position;
+                			player6.children[1].src = snapshot.val().player6.img;
+                			player6.children[2].innerHTML = snapshot.val().player6.playerName;
+                			var player7 = document.getElementById("player7");
+                			player7.children[0].innerHTML = snapshot.val().player7.position;
+                			player7.children[1].src = snapshot.val().player7.img;
+                			player7.children[2].innerHTML = snapshot.val().player7.playerName;
+                			var player8 = document.getElementById("player8");
+                			player8.children[0].innerHTML = snapshot.val().player8.position;
+                			player8.children[1].src = snapshot.val().player8.img;
+                			player8.children[2].innerHTML = snapshot.val().player8.playerName;
+                			var player9 = document.getElementById("player9");
+                			player9.children[0].innerHTML = snapshot.val().player9.position;
+                			player9.children[1].src = snapshot.val().player9.img;
+                			player9.children[2].innerHTML = snapshot.val().player9.playerName;
+                			var player10 = document.getElementById("player10");
+                			player10.children[0].innerHTML = snapshot.val().player10.position;
+                			player10.children[1].src = snapshot.val().player10.img;
+                			player10.children[2].innerHTML = snapshot.val().player10.playerName;
+            			});*/
+                    } 
                 }
                 else{
                 	window.location = '../index.html';

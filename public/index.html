@@ -51,7 +51,7 @@
                         </div>
                         <div id="SignUp" class="tab-pane" role="tabpanel">
                             <form class="form-signup">
-                                <label for="SignUpName">Name</label>
+                                <label for="SignUpName">Team Name</label>
                                 <input type="name" id="SignUpName" class="form-control hide-alert" placeholder="Name">
                                 <label for="SignUpEmail">Email</label>
                                 <input type="email" id="SignUpEmail" class="form-control hide-alert" placeholder="Email">
@@ -81,6 +81,7 @@
         firebase.initializeApp(config);
         const auth = firebase.auth();
         var provider = new firebase.auth.GoogleAuthProvider();
+        var firstTimeSignup = false;
 
         $('.form-signin').on('submit', event => {
             event.preventDefault();
@@ -112,6 +113,7 @@
         $('.form-signup').on('submit', event => {
 
             event.preventDefault();
+            firstTimeSignup = true;
             const email = document.getElementById("SignUpEmail").value;
             const pass = document.getElementById("SignUpPassword").value;
             const promise = auth.createUserWithEmailAndPassword(email,pass);
@@ -135,6 +137,7 @@
                 $("#login-error").css("visibility","visible");
                 console.log(errorMessage);
             });
+
         });
 
         $('#googlebtn').click(function() {
@@ -143,9 +146,17 @@
 
         firebase.auth().onAuthStateChanged(user => {
             if(user){
-                console.log('hi');
-                console.log(user);
-                window.location = 'views/myTeam.html'
+                //console.log(user.displayName);
+                if(firstTimeSignup){
+                    currentU = firebase.auth().currentUser;
+                    currentU.updateProfile({
+                        displayName: document.getElementById("SignUpName").value
+                    }).then(function(){
+                        window.location = 'views/myTeam.html'
+                    });
+                }else{
+                    window.location = 'views/myTeam.html'
+                }
             }
         });
 
