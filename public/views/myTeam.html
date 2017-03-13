@@ -38,35 +38,35 @@
 					<div class="col-md-2 col-md-offset-1">
 						<div class="centerBlock" id="player1">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2 ">
 						<div class="centerBlock" id="player2">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player3">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player4">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player5">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
@@ -75,35 +75,35 @@
 					<div class="col-md-2 col-md-offset-1">
 						<div class="centerBlock" id="player6">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player7">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player8">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player9">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player10">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="none" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
@@ -249,6 +249,10 @@
              			var player = document.getElementById(childSnapshot.key);
                 		player.children[0].innerHTML = childSnapshot.val().position;
                 		player.children[1].src = childSnapshot.val().img;
+                		if(childSnapshot.val().position == 'Position')
+                			player.children[1].setAttribute("data-toggle", "none");
+                		else
+                			player.children[1].setAttribute("data-toggle", "modal");
                 		player.children[2].innerHTML = childSnapshot.val().playerName;
                 		}
                 });
@@ -266,9 +270,10 @@
             }
             firebase.database().ref('users/'+uid+'/'+playerToDelete).update(blankPlayer);
             var player = document.getElementById(playerToDelete);
-            player.children[0].innerHTML = 'Choose Player';
+            player.children[0].innerHTML = 'Position';
             player.children[1].src = '../img/avatar.jpg';
-            player.children[1].innerHTML = 'Position';
+            player.children[1].setAttribute('data-toggle','none');
+            player.children[2].innerHTML = 'Choose Player';
         }
 
         /*Need to remember which player to delete when clicking modal*/
