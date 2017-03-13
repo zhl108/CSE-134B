@@ -59,14 +59,14 @@
 					<div class="col-md-2">
 						<div class="centerBlock" id="player4">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player5">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
@@ -75,35 +75,35 @@
 					<div class="col-md-2 col-md-offset-1">
 						<div class="centerBlock" id="player6">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player7">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player8">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player9">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player10">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
 						</div>
 					</div>
@@ -241,7 +241,7 @@
             }
         });	
         
-        /*Populates the players for the user's Team from the user's database*/
+        /*Populates the view for the user's team from the database*/
         function populateTeam(uid){
            	firebase.database().ref('users/'+uid).once('value').then(function(snapshot){
            		snapshot.forEach(function(childSnapshot){
@@ -250,12 +250,11 @@
                 		player.children[0].innerHTML = childSnapshot.val().position;
                 		player.children[1].src = childSnapshot.val().img;
                 		player.children[2].innerHTML = childSnapshot.val().playerName;
-
                 		}
                 });
             });
         }        
-        /*Removed the player from the team*/
+        /*Removed the player from the team and update the view*/
         function removePlayer() {
             var user = firebase.auth().currentUser;
             var uid = user.uid;
@@ -266,7 +265,6 @@
                 'position': 'Position'
             }
             firebase.database().ref('users/'+uid+'/'+playerToDelete).update(blankPlayer);
-            //console.log("deleted player " + playerToDelete);
             var player = document.getElementById(playerToDelete);
             player.children[0].innerHTML = 'Choose Player';
             player.children[1].src = '../img/avatar.jpg';
