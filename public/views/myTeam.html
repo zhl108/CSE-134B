@@ -38,25 +38,22 @@
 					<div class="col-md-2 col-md-offset-1">
 						<div class="centerBlock" id="player1">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player1')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2 ">
 						<div class="centerBlock" id="player2">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player2')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<div class="centerBlock" id="player3">
 							<label>Position</label>
-							<img src="../img/avatar.jpg" class="img-responsive"/>
+							<img src="../img/avatar.jpg" class="img-responsive" data-toggle="modal" data-target="#removePlayerModal"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player3')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -64,7 +61,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player4')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -72,7 +68,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player5')">Remove Player</a>
 						</div>
 					</div>
 				</div>
@@ -82,7 +77,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player6')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -90,7 +84,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player7')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -98,7 +91,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player8')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -106,7 +98,6 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player9')">Remove Player</a>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -114,13 +105,28 @@
 							<label>Position</label>
 							<img src="../img/avatar.jpg" class="img-responsive"/>
 							<label>Choose Player</label>
-                            <a onclick="removePlayer('player10')">Remove Player</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" role="dialog" id="removePlayerModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Remove from Team?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="removePlayer()">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
 	<footer class="footer">
 		<div class="container-fluid">
 			<div class="row">
@@ -138,6 +144,7 @@
 	</footer>
 	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 	<script type="text/javascript">
+		/*Import Firebase app*/
 		var config = {
 		apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
 		authDomain: "nbadex-ff8cf.firebaseapp.com",
@@ -145,10 +152,12 @@
 		storageBucket: "nbadex-ff8cf.appspot.com",
 		messagingSenderId: "172457613001"
 		};
-
 		firebase.initializeApp(config);
 		const auth = firebase.auth();
 
+		var playerToDelete;
+
+		/*Sign out functionality*/
 		$(document).ready(function(){   
 			$('#LogOut').click(function() {
 			    event.preventDefault();
@@ -156,6 +165,7 @@
 			});
 		});
 
+		/*Checks if user exists*/
         firebase.auth().onAuthStateChanged(user => {
             if(user){
                 var user = firebase.auth().currentUser;
@@ -170,18 +180,13 @@
 
                 //check if user/ has a child node with the name of uid
                 usersRef.once('value').then(function(snapshot) {
-                    //alert(snapshot.exists());
                     var hasID = snapshot.child(String(uid)).exists();
+
                     if (hasID) {
-                        //alert("exist: "+uid);
-                        
-                        //TODO: if the uid folder exist, get the player data from this folder and do further operation
+                    	/*Populate the user's team from Firebase*/                       
                         populateTeam(uid);
-                    }
-                    else {
-                        //if there the current uid folder does NOT exist, create one for it
-                        //TODO: create uid folder can be transfer to sign up page later
-                        //alert("non-exist: "+uid);
+                    }else {
+                    	/*Add blank players to the user's team*/
                         var tempJson = {};
                         var tempPic = '../img/avatar.jpg';
                         var player1 = {'playerName': 'Choose Player',
@@ -229,27 +234,29 @@
                         database.ref('users').update(tempJson);
                     }
                 });
-
-                function populateTeam(uid){
-                	firebase.database().ref('users/'+uid).once('value').then(function(snapshot){
-                		snapshot.forEach(function(childSnapshot){
-                			if((childSnapshot.key).includes('player')){
-                				var player = document.getElementById(childSnapshot.key);
-                				player.children[0].innerHTML = childSnapshot.val().position;
-                				player.children[1].src = childSnapshot.val().img;
-                				player.children[2].innerHTML = childSnapshot.val().playerName;
-
-                			}
-                		});
-                	});
-                }
             }
             else{
+            	/*If logging out, then there is no user. So send back to index*/
             	window.location = '../index.html';
             }
-        });
+        });	
         
-        function removePlayer(playerId) {
+        /*Populates the players for the user's Team from the user's database*/
+        function populateTeam(uid){
+           	firebase.database().ref('users/'+uid).once('value').then(function(snapshot){
+           		snapshot.forEach(function(childSnapshot){
+           			if((childSnapshot.key).includes('player')){
+             			var player = document.getElementById(childSnapshot.key);
+                		player.children[0].innerHTML = childSnapshot.val().position;
+                		player.children[1].src = childSnapshot.val().img;
+                		player.children[2].innerHTML = childSnapshot.val().playerName;
+
+                		}
+                });
+            });
+        }        
+        /*Removed the player from the team*/
+        function removePlayer() {
             var user = firebase.auth().currentUser;
             var uid = user.uid;
 
@@ -258,12 +265,20 @@
                 'img': '../img/avatar.jpg',
                 'position': 'Position'
             }
-
-            firebase.database().ref('users/'+uid+'/'+playerId).update(blankPlayer);
-            console.log("deleted player " + playerId);
-
-            window.location.reload();
+            firebase.database().ref('users/'+uid+'/'+playerToDelete).update(blankPlayer);
+            //console.log("deleted player " + playerToDelete);
+            var player = document.getElementById(playerToDelete);
+            player.children[0].innerHTML = 'Choose Player';
+            player.children[1].src = '../img/avatar.jpg';
+            player.children[1].innerHTML = 'Position';
         }
+
+        /*Need to remember which player to delete when clicking modal*/
+        $(document).on("click", ".img-responsive", function(){
+        	playerToDelete = $(this).parent().attr('id');
+        	console.log(playerToDelete);
+        });
+
 	</script>
 </body>
 </html>
