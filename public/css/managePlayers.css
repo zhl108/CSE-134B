@@ -43,3 +43,11 @@ ul li a{
     display: flex;
     align-items: center;
 }
+
+#close-btn:hover{
+    cursor: pointer;
+}
+
+#player-full{
+    margin-right: 10px;
+}
