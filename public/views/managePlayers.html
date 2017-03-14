@@ -437,12 +437,28 @@ var app = new Vue({
             lowername = name.toLowerCase();
             firebase.storage().ref('Players/' + name).child(lowername).getDownloadURL().then(function(url){
                 firebase.database().ref('users/'+user.uid).once('value').then(function(snapshot){
+                    //check if the player is in the team already
+                    var exist = snapshot.forEach(function(childSnapshot) {
+                        var exist = (childSnapshot.child('playerName').val() == playerS.name);
+
+                        if(exist){
+                            $('#player-full').addClass('alert-danger').removeClass('alert-success');
+                            $('#err-msg').html('Player exists in your team');
+                	        $("#player-full").css("visibility","visible");
+                            return true;
+                        }
+                    });
+                    
+                    if(exist)
+                        return;    //do Not add players
+                    
+                    //add the player if there is still space on the team
                     var i = 1;
                     while(i<=10){
                         var player = snapshot.child('player'+i).val();
                         if(player.playerName=='Choose Player'){
-                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position);
                             
+                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position);
                             $('#player-full').addClass('alert-success').removeClass('alert-danger');
                             $('#err-msg').html('player added successfully');
                 	        $("#player-full").css("visibility","visible");
@@ -467,10 +483,11 @@ var app = new Vue({
            return true;
        });
    };
-	 
-	 $("#close-btn").click(function(){
+    
+    $("#close-btn").click(function(){
 		 $("#player-full").css("visibility","hidden");
-	 });
+    });
+    
 
 </script>
 </html>
