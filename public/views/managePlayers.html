@@ -295,7 +295,6 @@ $(document).ready(function(){
 /*Once we have verified the user logs out, send them back to log in page*/
 firebase.auth().onAuthStateChanged(user => {
 	if(user){
-		console.log(user);
     }
     else{
     	window.location = '../index.html';
@@ -385,19 +384,19 @@ var app = new Vue({
                 stealsPerGame: document.getElementById("editSPG").value,
                 blocksPerGame: document.getElementById("editBPG").value,
                 playerEfficiencyRating: document.getElementById("editPER").value,
-                price: document.getElementById("editPrice").value
             });
 
 			var imgFile = document.getElementById("imgFileEdit").files[0];
-			console.log(imgFile);
-            const playerPath = "Players/" + firstName + lastName;
-            var playerRef = firebase.storage().ref(playerPath);
-            name = firstName+lastName
-            lowername = name.toLowerCase();
-            var imgRef = playerRef.child(lowername);
-            imgRef.put(imgFile).then(function() {
-                console.log("picture upload complete");
-            });
+            if(imgFile){
+                const playerPath = "Players/" + firstName + lastName;
+                var playerRef = firebase.storage().ref(playerPath);
+                name = firstName+lastName
+                lowername = name.toLowerCase();
+                var imgRef = playerRef.child(lowername);
+                imgRef.put(imgFile).then(function() {
+                    console.log("picture upload complete");
+                });                
+            }
         },
         /*Method to remove the img and stats from storage and database*/
         deletePlayer: function(player) {
