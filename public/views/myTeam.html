@@ -168,7 +168,6 @@
 		/*Checks if user exists*/
         firebase.auth().onAuthStateChanged(user => {
             if(user){
-                var user = firebase.auth().currentUser;
                 var teamName = "Team " + user.displayName;
                 document.getElementById("teamName").innerHTML = teamName;
 
@@ -251,8 +250,9 @@
                 		player.children[1].src = childSnapshot.val().img;
                 		if(childSnapshot.val().position == 'Position')
                 			player.children[1].setAttribute("data-toggle", "none");
-                		else
+                		else{
                 			player.children[1].setAttribute("data-toggle", "modal");
+                		}
                 		player.children[2].innerHTML = childSnapshot.val().playerName;
                 		}
                 });
@@ -279,7 +279,7 @@
         /*Need to remember which player to delete when clicking modal*/
         $(document).on("click", ".img-responsive", function(){
         	playerToDelete = $(this).parent().attr('id');
-        	console.log(playerToDelete);
+        	//console.log(playerToDelete);
         });
 
 	</script>
