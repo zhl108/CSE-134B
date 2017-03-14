@@ -457,8 +457,8 @@ var app = new Vue({
                     while(i<=10){
                         var player = snapshot.child('player'+i).val();
                         if(player.playerName=='Choose Player'){
-                            
-                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position);
+                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position, playerS.pointsPerGame, playerS.fieldGoalPercentage, playerS.reboundsPerGame, playerS.assistsPerGame, playerS.assistsPerGame, playerS.blocksPerGame, playerS.stealsPerGame, playerS.playerEfficiencyRating);
+
                             $('#player-full').addClass('alert-success').removeClass('alert-danger');
                             $('#err-msg').html('player added successfully');
                 	        $("#player-full").css("visibility","visible");
@@ -474,11 +474,18 @@ var app = new Vue({
         }
     }
     });
-    function updateUserTeam(uid, playerKey, imgUrl, name, pos){
+    function updateUserTeam(uid, playerKey, imgUrl, name, pos, ppg, fgp, rpg, apg, bpg, spg, per) {
         firebase.database().ref('users/' + uid + '/' + playerKey).update({
         img: imgUrl,
         playerName: name,
-        position: pos
+        position: pos,
+        pointsPerGame: ppg,
+        reboundsPerGame: rpg,
+        assistsPerGame: apg,
+        stealsPerGame: spg,
+        blocksPerGame: bpg,
+        fieldGoalPercentage: fgp,
+        playerEfficiencyRating: per
         }).then(function(){
            return true;
        });
