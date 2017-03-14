@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/css/Login.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 	</head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -16,9 +16,6 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"/>
-                        <span class="icon-bar"/>
-                        <span class="icon-bar"/>
                     </button>
                     <a class="navbar-brand" href="#">NBADex</a>
                 </div>
@@ -65,17 +62,15 @@
                 </div>
             </div>
         </div>
-
-        <!--Bootstrap JS-->
-        <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
-        <script type="text/javascript">
-
+    </body>
+    <script type="text/javascript">
+        /*Import our Firebase app*/
         var config = {
-        apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
-        authDomain: "nbadex-ff8cf.firebaseapp.com",
-        databaseURL: "https://nbadex-ff8cf.firebaseio.com",
-        storageBucket: "nbadex-ff8cf.appspot.com",
-        messagingSenderId: "172457613001"
+            apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
+            authDomain: "nbadex-ff8cf.firebaseapp.com",
+            databaseURL: "https://nbadex-ff8cf.firebaseio.com",
+            storageBucket: "nbadex-ff8cf.appspot.com",
+            messagingSenderId: "172457613001"
         };
 
         firebase.initializeApp(config);
@@ -83,6 +78,7 @@
         var provider = new firebase.auth.GoogleAuthProvider();
         var firstTimeSignup = false;
 
+        /*If user is signing in, check for errors*/
         $('.form-signin').on('submit', event => {
             event.preventDefault();
             const email = document.getElementById("LogInEmail").value;
@@ -110,14 +106,13 @@
 
         });
 
+        /*If user is signing up then check for errors*/
         $('.form-signup').on('submit', event => {
-
             event.preventDefault();
             firstTimeSignup = true;
             const email = document.getElementById("SignUpEmail").value;
             const pass = document.getElementById("SignUpPassword").value;
             const promise = auth.createUserWithEmailAndPassword(email,pass);
-            //auth.signInWithEmailAndPassword(email,pass);
             promise.catch(e  => {
                 var errorCode = e.code;
                 var errorMessage = e.message;
@@ -140,13 +135,15 @@
 
         });
 
+        /*If signing in with Google*/
         $('#googlebtn').click(function() {
             firebase.auth().signInWithPopup(provider);
         });
 
+        /*When the user has successfully sign up or logged in*/
         firebase.auth().onAuthStateChanged(user => {
             if(user){
-                //console.log(user.displayName);
+                /*If signing up for the first time, update the user's team name*/
                 if(firstTimeSignup){
                     currentU = firebase.auth().currentUser;
                     currentU.updateProfile({
@@ -160,6 +157,7 @@
             }
         });
 
+        /*Misc jQuery for error messages*/
         $('.alert .close').on('click', function(e) {
             $(this).parent().hide();
         });
@@ -170,7 +168,6 @@
         $(".hide-alert").focusin(function(){
             $("#login-error").css("visibility","hidden");
         });
-
-        </script>
-    </body>
+        
+    </script>
 </html>

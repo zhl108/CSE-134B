@@ -9,6 +9,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 	<title>AllPlayers</title>
 </head>
 <body>
@@ -18,9 +19,6 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"/>
-                    <span class="icon-bar"/>
-                    <span class="icon-bar"/>
                 </button>
                 <a class="navbar-brand" href="myTeam.html">NBADex</a>
             </div>
@@ -29,7 +27,6 @@
                     <li><a href="myTeam.html">My Team</a></li>
                     <li class="active"><a href="managePlayers.html">Player Management</a></li>
                     <li><a href="myTeamStats.html">View Stats</a></li>
-                    <li><a href="seasonSimulation.html">Simulate Season</a></li>
                     <li><a href="" id="LogOut">Log Out</a></li>
                 </ul>
             </div>
@@ -121,11 +118,6 @@
                                                 <input type="text" class="form-control" id="PER" placeholder="Player efficiency rating">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="Price" placeholder="Price">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +141,6 @@
 					<th>SPG</th>
 					<th>BPG</th>
 					<th>PER</th>
-					<th>Price</th>
 					<th>Edit Player</th>
                     <th>Add to Team</th>
                     <th>Delete</th>
@@ -166,7 +157,6 @@
 					<td>{{ player.stealsPerGame }}</td>
 					<td>{{ player.blocksPerGame }}</td>
 					<td>{{ player.playerEfficiencyRating }}</td>
-					<td>{{ player.price }}</td>
 					<td>
 						<button class="EditPlayerBtn" v-on:click="populate(player)" data-toggle="modal" data-target="#editPlayerModal">Update</button>
 					</td>
@@ -251,11 +241,6 @@
                                                             <input type="text" class="form-control" id="editPER" placeholder="Player efficiency rating">
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" id="editPrice" placeholder="Price">
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,9 +271,8 @@
 	</footer>
     </div>
 </body>
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 <script type="text/javascript">
-
+/*Initialize Firebase*/
 var config = {
 	apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
 	authDomain: "nbadex-ff8cf.firebaseapp.com",
@@ -300,21 +284,20 @@ var config = {
 firebase.initializeApp(config);
 const auth = firebase.auth();
 
+/*jQuery for logging out function*/
 $(document).ready(function(){
 	$('#LogOut').click(function() {
-		console.log("trying to log out");
 		event.preventDefault();
 		firebase.auth().signOut();
 	});
 });
 
+/*Once we have verified the user logs out, send them back to log in page*/
 firebase.auth().onAuthStateChanged(user => {
 	if(user){
-		console.log('hi');
 		console.log(user);
-        //window.location = 'myTeamBootstrap.html'
     }
-    else {
+    else{
     	window.location = '../index.html';
     }
 });
@@ -327,10 +310,10 @@ var app = new Vue({
         players: playersRef
     },
     methods: {
+        /*Method of adding the player's img to Firebase storage and adding player's stats to database*/
         addNewPlayer: function() {
             if (event) event.preventDefault();
             var img = $("input:file");
-            //console.log(img[0]);
             var imgNames = img[0].value.split('\\');
             const imgName = imgNames[imgNames.length-1];
             var imgFile = document.getElementById("imgFile").files[0];
@@ -360,9 +343,9 @@ var app = new Vue({
                 stealsPerGame: document.getElementById("SPG").value,
                 blocksPerGame: document.getElementById("BPG").value,
                 playerEfficiencyRating: document.getElementById("PER").value,
-                price: document.getElementById("Price").value
             });
         },
+        /*Method to populate the table with the player's from database*/
         populate: function(player) {
             names = player.name;
             const firstName = names.split(" ")[0];
@@ -383,9 +366,9 @@ var app = new Vue({
             document.getElementById("editRPG").value = player.reboundsPerGame;
             document.getElementById("editSPG").value = player.stealsPerGame;
             document.getElementById("editBPG").value = player.blocksPerGame;
-            document.getElementById("editPrice").value = player.price;
             document.getElementById("editPER").value = player.playerEfficiencyRating;
         },
+        /*Method to edit a player's img or stats*/
         editPlayer: function() {
             if (event) event.preventDefault();
             names = document.getElementById("editName").value;
@@ -415,22 +398,19 @@ var app = new Vue({
             imgRef.put(imgFile).then(function() {
                 console.log("picture upload complete");
             });
-
-
-            console.log("updating")
         },
+        /*Method to remove the img and stats from storage and database*/
         deletePlayer: function(player) {
             playersRef.child(player['.key']).remove();
-
             names = player.name;
             const firstName = names.split(" ")[0];
             const lastName = names.split(" ")[1];
             name = firstName+lastName;
             lowername = name.toLowerCase();
             firebase.storage().ref('Players/'+name).child(lowername).delete();
-
             console.log("deleted " + player.name);
         },
+        /*Method to add each player to the User's team*/
         addToTeam: function(playerS) {
             user = firebase.auth().currentUser;
             name = playerS.name.split(" ")[0] + playerS.name.split(" ")[1];
@@ -442,7 +422,6 @@ var app = new Vue({
                         var exist = (childSnapshot.child('playerName').val() == playerS.name);
 
                         if(exist){
-                            
                 	        $("#player-full").css("visibility","hidden");       
                             setTimeout(function(){
                                 $('#player-full').addClass('alert-danger').removeClass('alert-success');
@@ -452,17 +431,17 @@ var app = new Vue({
                             }, 50);
                             return true;
                         }
-                    });
-                    
+                    }); 
+
                     if(exist)
-                        return;    //do Not add players
+                        return;  //do Not add player if already exists in team*/
                     
                     //add the player if there is still space on the team
                     var i = 1;
                     while(i<=10){
                         var player = snapshot.child('player'+i).val();
                         if(player.playerName=='Choose Player'){
-                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position, playerS.pointsPerGame, playerS.fieldGoalPercentage, playerS.reboundsPerGame, playerS.assistsPerGame, playerS.assistsPerGame, playerS.blocksPerGame, playerS.stealsPerGame, playerS.playerEfficiencyRating);
+                            updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position, playerS.pointsPerGame, playerS.fieldGoalPercentage, playerS.reboundsPerGame, playerS.assistsPerGame, playerS.blocksPerGame, playerS.stealsPerGame, playerS.playerEfficiencyRating);
 
                 	        $("#player-full").css("visibility","hidden");       
                             setTimeout(function(){
@@ -474,7 +453,7 @@ var app = new Vue({
                         }
                         i++;
                     }
-                    
+                    //There rare no players left in hte team*/
                 	$("#player-full").css("visibility","hidden");       
                     setTimeout(function(){
                         $('#player-full').addClass('alert-danger').removeClass('alert-success');
@@ -487,6 +466,7 @@ var app = new Vue({
         }
     }
     });
+    /*Method that will update a certain player slot in the User's team with a  specified player*/
     function updateUserTeam(uid, playerKey, imgUrl, name, pos, ppg, fgp, rpg, apg, bpg, spg, per) {
         firebase.database().ref('users/' + uid + '/' + playerKey).update({
         img: imgUrl,

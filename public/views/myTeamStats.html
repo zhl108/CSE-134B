@@ -9,15 +9,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 </head>
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"/>
-                <span class="icon-bar"/>
-                <span class="icon-bar"/>
             </button>
             <a class="navbar-brand" href="myTeam.html">NBADex</a>
         </div>
@@ -26,7 +24,6 @@
                 <li><a href="myTeam.html">My Team</a></li>
                 <li><a href="managePlayers.html">Player Management</a></li>
                 <li class="active"><a href="myTeamStats.html">View Stats</a></li>
-                <li><a href="seasonSimulation.html">Simulate Season</a></li>
                 <li><a href="" id="LogOut">Log Out</a></li>
             </ul>
         </div>
@@ -44,8 +41,8 @@
                         <th><label>Position</label></th>
                         <th><label>PPG</label></th>
                         <th><label>FG%</label></th>
-                        <th><label>REB</label></th>
                         <th><label>AST</label></th>
+                        <th><label>REB</label></th>
                         <th><label>STL</label></th>
                         <th><label>BLK</label></th>
                         <th><label>PER</label></th>
@@ -57,8 +54,8 @@
                         <td>{{ player.position }}</td>
                         <td>{{ player.pointsPerGame }}</td>
                         <td>{{ player.fieldGoalPercentage }}</td>
-                        <td>{{ player.reboundsPerGame }}</td>
                         <td>{{ player.assistsPerGame }}</td>
+                        <td>{{ player.reboundsPerGame }}</td>
                         <td>{{ player.stealsPerGame }}</td>
                         <td>{{ player.blocksPerGame }}</td>
                         <td>{{ player.playerEfficiencyRating }}</td>
@@ -68,8 +65,8 @@
         </div>
     </div>
 </body>
-<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
 <script type="text/javascript">
+/*Initialize Firebase*/
 var config = {
 apiKey: "AIzaSyCcIuaDuAx9NFJKzBj4FkuR3e320eGuS_g",
 authDomain: "nbadex-ff8cf.firebaseapp.com",
@@ -81,6 +78,7 @@ messagingSenderId: "172457613001"
 firebase.initializeApp(config);
 const auth = firebase.auth();
 
+/*Log out functionality*/
 $(document).ready(function(){   
     $('#LogOut').click(function() {
         event.preventDefault();
@@ -88,6 +86,7 @@ $(document).ready(function(){
     });
 });
 
+/*Give Vue.js the data for all of the User''s players*/
 firebase.auth().onAuthStateChanged(user => {
     if(user){
         var uid = user.uid;
@@ -100,8 +99,8 @@ firebase.auth().onAuthStateChanged(user => {
                 players: playersRef
             }
         })
-        //window.location = 'myTeamBootstrap.html'
     }else{
+        /*If logging out send them back to index*/
         window.location = '../index.html';
     }
 });
