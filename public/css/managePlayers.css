@@ -51,3 +51,7 @@ ul li a{
 #player-full{
     margin-right: 10px;
 }
+
+[v-cloak] {
+  display: none;
+}
