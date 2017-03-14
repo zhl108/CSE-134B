@@ -442,9 +442,14 @@ var app = new Vue({
                         var exist = (childSnapshot.child('playerName').val() == playerS.name);
 
                         if(exist){
-                            $('#player-full').addClass('alert-danger').removeClass('alert-success');
-                            $('#err-msg').html('Player exists in your team');
-                	        $("#player-full").css("visibility","visible");
+                            
+                	        $("#player-full").css("visibility","hidden");       
+                            setTimeout(function(){
+                                $('#player-full').addClass('alert-danger').removeClass('alert-success');
+                                $('#err-msg').html('Player exists in your team');
+                	            $("#player-full").css("visibility","visible");
+                                
+                            }, 50);
                             return true;
                         }
                     });
@@ -459,16 +464,24 @@ var app = new Vue({
                         if(player.playerName=='Choose Player'){
                             updateUserTeam(user.uid, 'player'+i, url, playerS.name, playerS.position, playerS.pointsPerGame, playerS.fieldGoalPercentage, playerS.reboundsPerGame, playerS.assistsPerGame, playerS.assistsPerGame, playerS.blocksPerGame, playerS.stealsPerGame, playerS.playerEfficiencyRating);
 
-                            $('#player-full').addClass('alert-success').removeClass('alert-danger');
-                            $('#err-msg').html('player added successfully');
-                	        $("#player-full").css("visibility","visible");
+                	        $("#player-full").css("visibility","hidden");       
+                            setTimeout(function(){
+                                $('#player-full').addClass('alert-success').removeClass('alert-danger');
+                                $('#err-msg').html('player added successfully');
+                	            $("#player-full").css("visibility","visible");
+                            }, 50);
                             return;
                         }
                         i++;
                     }
-                    $('#player-full').addClass('alert-danger').removeClass('alert-success');
-                    $('#err-msg').html('Team is full, cannot add more players');
-                	$("#player-full").css("visibility","visible");
+                    
+                	$("#player-full").css("visibility","hidden");       
+                    setTimeout(function(){
+                        $('#player-full').addClass('alert-danger').removeClass('alert-success');
+                        $('#err-msg').html('Team is full, cannot add more players');
+                	    $("#player-full").css("visibility","visible");       
+                    }, 50);
+
                 });
             });
         }
